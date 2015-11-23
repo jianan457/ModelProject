@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.secTitle = "栏目管理列表";
+    Layout = "~/Views/Shared/_layoutPartal.cshtml";
+}
+<script src="~/Scripts/ManagerJs.js"></script>
+ <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="/Manager/Index">首页</a></li>
+        <li><a href="#">栏目管理</a></li>
+    </ul>
+</div>
+
+<div class="rightinfo">
+
+    <div class="tools">
+        <ul class="toolbar">
+            <li><span onclick="addfristCol()"><img src="/images/t01.png" /></span>添加一级栏目</li>
+            <li class="click"><span><img src="/images/t03.png" /></span>删除</li>
+        </ul>
+    </div>
+    <table class="tablelist">
+        <thead>
+            <tr>
+                <th><input name="chk_list" type="checkbox" value="" id="checkboxall" /> 
+               编号</th>
+                <th>栏目名称</th>
+                <th>栏目等级</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (ViewBag.data != null)
+            {
+                int i = 1;
+                foreach (var item in ViewBag.data)
+                {
+                    <tr>
+                        <td><input name="chk_list" type="checkbox" value="@item.ID" id="checkbox_@item.ID" />  @(i++)</td> 
+                        <td>@item.Name</td>
+                        <td>@CompanyModelProject.Common.NumToChinese.getStatic(@item.level)</td>
+                        <td><a href="#" class="tablelink" onclick="addsonCol(@item.ID)"> 添加子栏目</a> | <a href="#" class="tablelink" onclick="editcol(@item.ID)">编辑</a> | <a href="#" class="tablelink" onclick="delcol(@item.ID)"> 删除</a> </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <div class="tip">
+        <div class="tiptop"><span>提示信息</span><a></a></div>
+        <div class="tipinfo">
+            <span><img src="/images/ticon.png" /></span>
+            <div class="tipright">
+                <p>是否确认删除信息 ？</p>
+                <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+            </div>
+        </div>
+
+        <div class="tipbtn">
+            <input name="" type="button" class="sure" value="确定" />&nbsp;
+            <input name="" type="button" class="cancel" value="取消" />
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+<script type="text/javascript">
+    
+    $('.tablelist tbody tr:odd').addClass('odd');
+    $(function () {
+        selectall('column');
+        var id = '@ViewBag.liId';
+        $(".menuson").hide();
+        $("#" + id).addClass("active");
+        $("#" + id).parent().show();
+    })
+    
+</script>

@@ -1,0 +1,35 @@
+﻿@model CompanyModelProject.Model.AdminInfoModel
+@{
+    ViewBag.secTitle = "用户信息修改";
+    Layout = "~/Views/Shared/_layoutPartal.cshtml";
+} 
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="/Manager/Index">首页</a></li>
+        <li><a href="/Manager/UserList">管理员列表</a></li>
+        <li><a href="#">修改用户信息</a></li>
+    </ul>
+</div>
+
+<div class="formbody">
+    @{
+        Html.EnableClientValidation();
+    } 
+    @using (Html.BeginForm("UserModtify", "Account", FormMethod.Post, new { @class = "am-form", role = "form", @id = "formID" }))
+    {
+        <div class="formtitle"><span>基本信息</span></div>
+        <ul class="forminfo">
+            <li><label>用户名</label>@Html.TextBoxFor(Model => Model.AdminName, new { @class = "dfinput", @readonly = true }) </li> 
+            <li><label>邮箱</label>@Html.TextBoxFor(Model => Model.Email, new { @class = "dfinput" }) *@Html.ValidationMessageFor(Model => Model.Email)</li>
+               <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="提交保存" /></li>
+        </ul>
+    }
+</div>
+<script type="text/javascript">
+      
+        var id = '@ViewBag.liId';
+    $(".menuson").hide();
+    $("#" + id).addClass("active");
+    $("#" + id).parent().show();
+</script>

@@ -1,0 +1,135 @@
+﻿@model CompanyModelProject.Model.NewsModel
+@{
+    ViewBag.secTitle = "内容修改";
+    Layout = "~/Views/Shared/_layoutPartal.cshtml";
+}
+<script type="text/javascript" src="/Scripts/jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="/Scripts/select-ui.min.js"></script>
+<script src="~/Scripts/ajaxfileupload.js"></script>
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="/Manager/Index">首页</a></li> 
+        <li><a href="/Manager/NewsList">内容管理列表</a></li>
+        <li><a href="#">内容修改</a></li>
+    </ul>
+</div>
+<div class="formbody">
+    <div id="usual1" class="usual">
+
+        <div class="itab">
+            <ul>
+                <li><a href="#tab1" class="selected">选择栏目</a></li>
+                <li><a href="#tab2">修改内容</a></li>
+            </ul>
+        </div>
+
+        <div id="tab1" class="tabson">
+
+            <ul class="forminfo">
+                <li>
+                    <label>一级栏目<b>*</b></label>
+                    <select id="FriCol" name="FriCol" class="dfinput" onchange="selectDpList(this.value, 'SecCol','')"></select>
+                </li>
+                <li id="SecColli" style="display:none;">
+                    <label>二级栏目</label><select id="SecCol" name="SecCol" class="dfinput" onchange="selectDpList(this.value, 'ThirdCol','')"></select>
+                </li>
+                <li id="ThirdColli" style="display:none;">
+                    <label>三级栏目</label><select id="ThirdCol" name="ThirdCol" class="dfinput" onchange="setColId(this.value)"></select>
+                </li>
+                @*<li> <input type="button" id="btntype" value="确认分类" onclick="btntype()"/></li>*@
+            </ul>
+        </div>
+
+        <div id="tab2" class="tabson">
+            @{
+                Html.EnableClientValidation();
+            }
+            @using (Html.BeginForm("NewsModtify", "News", FormMethod.Post, new { @class = "am-form", role = "form", @id = "formID" }))
+            {
+                <ul class="forminfo">
+                    <li>@Html.HiddenFor(Model => Model.ColumnId)</li>
+                    <li><label>标    题<b>*</b></label> @Html.TextBoxFor(Model => Model.Title, new { @class = "dfinput" })<i>@Html.ValidationMessageFor(Model => Model.Title)</i></li>
+                    <li>
+                        <label>缩略图</label>
+                        <input id="newspic" type="file" name="newspic" />
+                        <input id="btnpic" type="button" value="上传" onclick="uploadnewsimg()" />
+                        <p> 
+                        <img id="imgnewspic" alt="" src="@ViewBag.img" width="200" height="200" /></p>
+                        @Html.HiddenFor(Model => Model.picUrl, new { id = "hdimgnewspic" })
+                        @Html.ValidationMessageFor(Model => Model.picUrl)
+
+                    </li>
+                    <li><label>引用地址</label>@Html.TextBoxFor(Model => Model.fromUrl, new { @class = "dfinput" })</li>
+                    <li><label>内容摘要</label>@Html.TextAreaFor(Model => Model.BriefMain, new { @class = "dfinput", @style = "width:500px;height:60px;" })</li>
+
+                    <li>
+                        <label>文章内容<b>*</b></label>
+                        @Html.TextAreaFor(Model => Model.Main, new { @id = "content7", @style = "width:700px;height:250px;visibility:hidden;" })
+                    </li>
+                    <li><label>排序</label>@Html.TextBoxFor(Model => Model.orders, new { @class = "dfinput" }) *@Html.ValidationMessageFor(Model => Model.orders)</li>
+
+                    <li>
+                        <label>页面推荐<b>*</b></label>@Html.RadioButtonFor(Model => Model.IsClomnrecommond, false, new { id = "showradio0" }) 否  @Html.RadioButtonFor(Model => Model.IsClomnrecommond, true, new { id = "showradio1" }) 是
+                        *@Html.ValidationMessageFor(Model => Model.IsClomnrecommond)
+                    </li>
+                    <li>
+                        <label>首页推荐<b>*</b></label>@Html.RadioButtonFor(Model => Model.IsIndexRecommond, false, new { id = "indexshowradio0" }) 否  @Html.RadioButtonFor(Model => Model.IsIndexRecommond, true, new { id = "indexshowradio1" }) 是
+                        *@Html.ValidationMessageFor(Model => Model.IsIndexRecommond)
+                    </li>
+                  
+                    <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="提交保存" /></li>
+                </ul>
+            }
+        </div>
+
+    </div>
+
+</div>
+<script type="text/javascript" src="/editor/kindeditor.js"></script>
+<script type="text/javascript">
+    KE.show({
+        id: 'content7',
+        cssPath: './index.css'
+    });
+</script>
+<script type="text/javascript">
+    $("#usual1 ul").idTabs();
+</script>
+
+<script>
+    $(function () {
+        var id = '@ViewBag.liId';
+        $(".menuson").hide();
+        $("#" + id).addClass("active");
+        $("#" + id).parent().show();
+        var option = '<option value="0">请选择</option>';
+        var fristCId='@ViewBag.FcolId';
+        var secCId='@ViewBag.ScolId';
+        var thridCId='@ViewBag.ThridId';
+
+        $.get('/News/fristHandler?date=' + new Date(), {}, function (data) {
+            if (data.code == 0) {
+                var obj = eval(data.data);
+                for (var i = 0; i < obj.length; i++) {
+                    option += ' <option value="' + obj[i].Id + '">' + obj[i].columnName + '</option>';
+                }
+                $("#FriCol").html(option);
+                $("#FriCol").val(fristCId);
+            }
+            else { $("#FriCol").html(option); }
+        });
+        var level = '@ViewBag.level';
+        if (level == '1') { 
+            selectDpList(fristCId, "SecCol", secCId);///加载dropdownlist的选项 
+             //给dropdownlist赋值
+        }
+        if (level=='2') {
+            selectDpList(fristCId, "SecCol", secCId);
+            selectDpList(secCId, "ThirdCol", thridCId);
+          
+        }
+    })
+
+</script>
+

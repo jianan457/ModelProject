@@ -1,0 +1,44 @@
+﻿@model CompanyModelProject.Model.ColumnModel
+@{
+    ViewBag.secTitle = "添加子栏目";
+    Layout = "~/Views/Shared/_layoutPartal.cshtml";
+}
+
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="/Manager/Index">首页</a></li>
+        <li><a href="/Manager/ColumnList">栏目管理</a></li>
+        <li><a href="#">添加子栏目</a></li>
+    </ul>
+</div>
+<div class="formbody">
+    @{
+        Html.EnableClientValidation();
+    }
+
+    @using (Html.BeginForm("ColumnSonAdd", "Manager", FormMethod.Post, new { @class = "am-form", role = "form", @id = "formID" }))
+    {
+        <div class="formtitle"><span>添加子栏目</span></div>
+        <ul class="forminfo">
+            <li><label>上级栏目</label><input type="text" value="@ViewBag.upname" class="dfinput"  readonly="readonly"/> @Html.HiddenFor(Model => Model.Upid, new {@Value= ViewBag.upid })</li>
+
+            <li><label>栏目名称</label>@Html.TextBoxFor(Model => Model.ColumnName, new { @class = "dfinput" }) *@Html.ValidationMessageFor(Model => Model.ColumnName)</li>
+
+            <li><label>排序</label>@Html.TextBoxFor(Model => Model.Orders, new { @class = "dfinput" }) *@Html.ValidationMessageFor(Model => Model.Orders)</li>
+            <li>
+                <label>首页推荐</label>@Html.RadioButtonFor(Model => Model.IsShow, false, new { id = "showradio0" }) 否  @Html.RadioButtonFor(Model => Model.IsShow, true, new { id = "showradio1" }) 是
+                *@Html.ValidationMessageFor(Model => Model.IsShow)
+            </li>
+            <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="提交保存" /></li>
+        </ul>
+    }
+</div>
+<script>
+    $(function () {
+        var id = '@ViewBag.liId';
+        $(".menuson").hide();
+        $("#" + id).addClass("active");
+        $("#" + id).parent().show();
+    })
+</script>

@@ -1,0 +1,41 @@
+﻿@model CompanyModelProject.Model.baseInfoModel
+
+@{
+    ViewBag.secTitle = "网站基础信息";
+    Layout = "~/Views/Shared/_layoutPartal.cshtml";
+}
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="/Manager/Index">首页</a></li> 
+        <li><a href="#">网站基础信息</a></li>
+    </ul>
+</div>
+<div class="formbody">
+    @{
+        Html.EnableClientValidation();
+    }
+
+    @using (Html.BeginForm("WebBaseInfo", "Manager", FormMethod.Post, new { @class = "am-form", role = "form", @id = "formID" }))
+    {
+        <div class="formtitle"><span>网站基础信息</span></div>
+        <ul class="forminfo">
+            <li><label>网站名称</label>@Html.TextBoxFor(Model => Model.webName, new { @class = "dfinput" }) *@Html.ValidationMessageFor(Model => Model.webName)</li>
+            <li><label>网站域名</label>@Html.TextBoxFor(Model => Model.domain, new { @class = "dfinput" }) *@Html.ValidationMessageFor(Model => Model.domain)</li>
+            <li><label>关键字</label>@Html.TextAreaFor(Model => Model.keywords, new { @class = "dfinput", @style = "width:500px;height:60px;" })</li>
+            <li><label>网站描述</label>@Html.TextAreaFor(Model => Model.description, new { @class = "dfinput", @style = "width:500px;height:60px;" })</li>
+             <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="提交保存" /></li>
+            <li>@Html.HiddenFor(Model=>Model.ID)</li>
+        </ul>
+    }
+</div>
+<script>
+    $(function () {
+        var id = '@ViewBag.liId';
+        $(".menuson").hide();
+        $("#" + id).addClass("active");
+        $("#" + id).parent().show();
+    })
+</script>
+
+ 

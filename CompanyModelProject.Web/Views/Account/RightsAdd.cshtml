@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.secTitle = "编辑权限";
+    Layout = "~/Views/Shared/_layoutPartal.cshtml";
+}
+
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="/Manager/Index">首页</a></li>
+        <li><a href="/Account/UserList">管理员管理</a></li>
+        <li><a href="#">编辑权限</a></li>
+    </ul>
+</div>
+
+<div class="formbody"> 
+
+    <div class="formtitle"><span>权限选项</span></div>
+
+    <ul class="forminfo">
+        <li><label style="font-weight:bold;">栏目管理</label></li>
+        @if (@ViewBag.data1 != null)
+{
+    foreach (var item in ViewBag.data1)
+    {
+        <li><input name="chk_list" type="checkbox" value="@item.ID" id="checkbox_@item.ID" /> @item.RightsName</li>
+    }
+}
+        <li><label style="font-weight:bold;">内容管理</label></li>
+        @if (@ViewBag.data2 != null)
+        {
+            foreach (var item in ViewBag.data2)
+            {
+        <li><input name="chk_list" type="checkbox" value="@item.ID" id="checkbox_@item.ID" /> @item.RightsName</li>
+            }
+        }
+        <li><label style="font-weight:bold;">网站设置</label></li>
+        @if (@ViewBag.data3 != null)
+        {
+            foreach (var item in ViewBag.data3)
+            {
+        <li><input name="chk_list" type="checkbox" value="@item.ID" id="checkbox_@item.ID" /> @item.RightsName</li>
+            }
+        }
+        <li><label>&nbsp;</label><input name="" type="button" class="btn" value="提 交" onclick="addright(@ViewBag.UserId)" /></li>
+    </ul>
+
+
+</div>
+<script>
+    $(function () {
+        var id = '@ViewBag.liId';
+        $(".menuson").hide();
+        $("#" + id).addClass("active");
+        $("#" + id).parent().show();
+        getusrofrights(@ViewBag.UserId);
+    })
+</script>

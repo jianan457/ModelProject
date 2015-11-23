@@ -1,0 +1,41 @@
+﻿@model CompanyModelProject.Model.MessageModel
+@{
+    ViewBag.secTitle = "添加表单";
+    Layout = "~/Views/Shared/_layoutPartal.cshtml";
+} 
+ <div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="/Manager/Index">首页</a></li>
+        <li><a href="/Manager/MessageList">表单管理</a></li>
+        <li><a href="#">表单信息</a></li> 
+    </ul>
+</div>
+<div class="formbody">
+    @{
+        Html.EnableClientValidation();
+    } 
+    @using (Html.BeginForm("MessageAdd", "Manager", FormMethod.Post, new { @class = "am-form", role = "form", @id = "formID" }))
+    {
+        <div class="formtitle"><span>网站基础信息</span></div>
+        <ul class="forminfo">
+            <li><label>姓名</label>@Html.TextBoxFor(Model => Model.username, new { @class = "dfinput" }) *@Html.ValidationMessageFor(Model => Model.username)</li>
+            <li><label>联系邮箱</label>@Html.TextBoxFor(Model => Model.Email, new { @class = "dfinput" })</li>
+            <li><label>QQ</label>@Html.TextAreaFor(Model => Model.QQ, new { @class = "dfinput"}) </li>
+            <li><label>手机号</label>@Html.TextAreaFor(Model => Model.phone, new { @class = "dfinput" }) *@Html.ValidationMessageFor(Model => Model.phone)</li>
+           
+             <li><label>留言内容</label>@Html.TextAreaFor(Model => Model.main, new { @class = "dfinput", @style = "width:500px;height:60px;" })*@Html.ValidationMessageFor(Model => Model.main)</li>
+            <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="提交保存" /></li>
+        </ul>
+    }
+</div>
+
+ <script>
+    $(function () {
+        var id = '@ViewBag.liId';
+        $(".menuson").hide();
+        $("#" + id).addClass("active");
+        $("#" + id).parent().show();
+    })
+</script>
+

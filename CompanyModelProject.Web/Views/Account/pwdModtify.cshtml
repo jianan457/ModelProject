@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.secTitle = "修改密码";
+    Layout = "~/Views/Shared/_layoutPartal.cshtml";
+}
+
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="/Manager/Index">首页</a></li>
+        <li><a href="/Account/UserList">管理员编辑</a></li>
+        <li><a href="#">修改密码</a></li>
+    </ul>
+</div>
+
+<div class="formbody">  
+    <div class="formtitle"><span>基本信息</span></div> 
+    <ul class="forminfo">
+        <li><label>请输入密码</label><input name="" type="password" class="dfinput" id="pwd1"/><i id="spanpassword"></i></li>
+        <li><label>请确认密码</label><input name="" type="password" class="dfinput" id="pwd2" /><i id="spanpassword2"></i></li>  
+        <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确认保存" onclick="EditPassword(@ViewBag.UId)" /></li>
+    </ul> 
+</div>
+<script type="text/javascript"> 
+        var id = '@ViewBag.liId';
+    $(".menuson").hide();
+    $("#" + id).addClass("active");
+    $("#" + id).parent().show();
+</script>

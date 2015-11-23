@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.secTitle = "管理后台首页";
+    Layout = "~/Views/Shared/_layoutPartal.cshtml";
+}
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="/Manager/Index">首页</a></li>
+    </ul>
+</div>
+
+<div class="mainindex"> 
+    <div class="welinfo">
+        <span><img src="/images/sun.png" alt="天气" /></span>
+        <b>Admin早上好，欢迎使用信息管理系统</b><a href="/Account/pwdModtify/@ViewBag.Id">修改登录密码</a>
+        <a href="/Account/UserModtify/@ViewBag.Id">帐号设置</a>
+    </div>  
+    <div class="xline"></div> 
+    <ul class="iconlist"> 
+        <li id="indexli2"><img src="/images/ico01.png" /><p><a href="/Manager/ColumnList">栏目管理</a></p></li>
+        <li id="indexli3"><img src="/images/ico02.png" /><p><a href="/News/NewsAdd">发布内容</a></p></li>
+        <li id="indexli6"><img src="/images/ico03.png" /><p><a href="/Account/UserList">管理员管理</a></p></li>  
+        <li id="indexli1"></li>
+        <li id="indexli5"></li>
+        <li id="indexli4"></li>
+        <li id="indexli7"></li>
+
+    </ul> 
+    <div class="xline"></div> 
+  
+</div>

@@ -1,0 +1,66 @@
+﻿<script type="text/javascript">
+    $(function () {
+        //导航切换
+   
+        $(".menuson li").click(function () {
+            $(".menuson li.active").removeClass("active")
+            //$(this).addClass("active"); 
+          
+        }); 
+        $('.title').click(function () {
+            var $ul = $(this).next('ul');
+            $('dd').find('ul').slideUp();
+            if ($ul.is(':visible')) {
+                $(this).next('ul').slideUp();
+            } else {
+                $(this).next('ul').slideDown();
+            }
+        });
+        var rightids = '@ViewBag.RightsId';
+        var ids = rightids.split(",");
+        $(".menuson li").hide();
+        $(".iconlist li").hide();
+        for (var i = 0; i < ids.length; i++) {
+            $("#columnli" + ids[i]).show();
+            $("#indexli" + ids[i]).show(); 
+        }
+       
+
+    })
+
+</script> 
+<div class="lefttop"><span></span><A href="/Manager/Index">首页</A></div>
+<dl class="leftmenu"> 
+    <dd>
+        <div class="title">
+            <span><img src="/images/leftico01.png" /></span>栏目管理
+        </div>
+        <ul class="menuson"> 
+            <li id="columnli1"><cite></cite><a href="/Manager/ColumnFristAdd">添加栏目</a><i></i></li>  
+            <li id="columnli2"><cite></cite><a href="/Manager/ColumnList">栏目管理</a><i></i></li> 
+        </ul>
+    </dd>
+
+    <dd>
+        <div class="title">
+            <span><img src="/images/leftico01.png" /></span>内容管理
+        </div>
+        <ul class="menuson">
+            <li id="columnli3"><cite></cite><a href="/News/NewsAdd">添加内容</a><i></i></li>
+            <li id="columnli4"><cite></cite><a href="/News/NewsList">内容管理</a><i></i></li>
+        </ul>
+    </dd>
+ 
+    <dd>
+        <div class="title">
+            <span><img src="/images/leftico02.png" /></span>网站设置
+        </div>
+        <ul class="menuson">
+            <li id="columnli5"><cite></cite><a href="/Manager/WebBaseInfo">网站基础信息</a><i></i></li>
+            <li id="columnli6"><cite></cite><a href="/Account/UserList">管理员管理</a><i></i></li>
+            <li id="columnli7"><cite></cite><a href="/Manager/MessageList">表单管理</a><i></i></li>
+
+        </ul>
+    </dd>
+</dl>
+

@@ -1,0 +1,91 @@
+﻿@*渲染一个分页控件
+    需要传入一个List<string>的数组，用于表示当前的页码
+    curent用于表示当前的页码
+    每个元素的Page表示为一个int的页码*@
+
+@helper RenderPageControl(List<string> pages, int curent)
+{
+    <div class="pagin">
+
+        @if (pages.Count > 0)
+        {
+            bool last = curent - 1 >= 0;
+            bool next = curent + 1 < pages.Count;
+
+            @* 计算页码开始和结束的数字-前后各取10页 *@
+            int total = pages.Count;
+            int begin = curent - 10;
+            int end = begin + 20;
+            <div class="message">共<i class="blue">@total</i>页，当前显示第&nbsp;<i class="blue">@(curent + 1) &nbsp;</i>页</div>
+            
+                if (last)
+                {
+
+                <li class="paginItem"><a href="@pages[curent-1]"><span class="pagepre"></span></a></li>
+                }
+                else
+                {
+
+                <li class="paginItem"><a href="javascript:;"><span class="pagepre"></span></a></li>
+                }
+           
+            if (begin < 0)
+            {
+                if (end - begin < total)
+                {
+                    end = end - begin;
+                }
+                begin = 0;
+            }
+            if (end > total)
+            {
+                if (begin - (end - total) >= 0)
+                {
+                    begin = begin - (end - total);
+                }
+                end = total;
+            }
+            if (total > 5)
+            {
+                for (int i = begin; i < begin + 5; i++)
+                {
+                    if (i != curent)
+                    {
+                        <li class="paginItem"><a href="@pages[i]">@(i + 1)</a></li>
+                    }
+                    else
+                    {
+                        <li class="paginItem current"><a href="@pages[i]">@(i + 1)</a></li>
+                    }
+                }
+            }
+            else
+            {
+                for (int i = begin; i < total; i++)
+                {
+                    if (i != curent)
+                    {
+                        <li class="paginItem"><a href="@pages[i]">@(i + 1)</a></li>
+                    }
+                    else
+                    {
+                        <li class="paginItem current"><a href="@pages[i]">@(i + 1)</a></li>
+                    }
+                }
+            }
+
+            if (next)
+            {
+                <li class="paginItem"><a href="@pages[curent+1]"><span class="pagenxt"></span></a></li>
+
+            }
+            else
+            {
+                <li class="paginItem"><a href="javascript:;"><span class="pagenxt"></span></a></li>
+            }
+            @*<li>  <a href="@pages.Last()">@total</a></li>*@
+
+        }
+
+    </div>
+}

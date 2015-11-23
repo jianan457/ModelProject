@@ -1,0 +1,39 @@
+﻿@model CompanyModelProject.Model.RegisterModel
+@{
+    ViewBag.secTitle = "添加管理员";
+    Layout = "~/Views/Shared/_layoutPartal.cshtml";
+}
+
+<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+        <li><a href="/Manager/Index">首页</a></li>
+        <li><a href="#">添加管理员</a></li>
+    </ul>
+</div>
+
+<div class="formbody">
+    @{
+        Html.EnableClientValidation();
+    } 
+
+    @using (Html.BeginForm("Regisiter", "Account", FormMethod.Post, new { @class = "am-form", role = "form", @id = "formID" }))
+    { 
+        <div class="formtitle"><span>基本信息</span></div> 
+        <ul class="forminfo">
+            <li><label>用户名</label>@Html.TextBoxFor(Model=>Model.AdminName,new {@class="dfinput"}) *@Html.ValidationMessageFor(Model => Model.AdminName)</li>
+            <li><label>邮箱</label>@Html.TextBoxFor(Model => Model.Email, new { @class = "dfinput" }) *@Html.ValidationMessageFor(Model => Model.Email)</li>
+            <li><label>密码</label>@Html.PasswordFor(Model => Model.Pwd, new { @class = "dfinput" }) *@Html.ValidationMessageFor(Model => Model.Pwd)</li>
+            <li><label>确认密码</label>@Html.PasswordFor(Model => Model.comfirmPwd, new { @class = "dfinput" }) *@Html.ValidationMessageFor(Model => Model.comfirmPwd)</li> 
+            <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="提交保存" /></li>
+        </ul> 
+    }
+</div>
+<script>
+    $(function () { 
+        var id = '@ViewBag.liId';
+        $(".menuson").hide();
+        $("#" + id).addClass("active");
+        $("#" + id).parent().show();
+    })
+</script>

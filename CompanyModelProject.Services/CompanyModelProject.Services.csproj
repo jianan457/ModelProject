@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A04DF6CA-1253-4D9C-BD6E-2CED21CEB764}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CompanyModelProject.Services</RootNamespace>
+    <AssemblyName>CompanyModelProject.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="RightsOfUserServices.cs" />
+    <Compile Include="RightsServices.cs" />
+    <Compile Include="MessageServices.cs" />
+    <Compile Include="baseInfoServices.cs" />
+    <Compile Include="NewsServices.cs" />
+    <Compile Include="AdminInfoServices.cs" />
+    <Compile Include="ColumnServices.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CompanyModelProject.Common\CompanyModelProject.Common.csproj">
+      <Project>{5a243ed1-6173-4d8e-a059-ee7752d82352}</Project>
+      <Name>CompanyModelProject.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CompanyModelProject.DataAccess\CompanyModelProject.DataAccess.csproj">
+      <Project>{1cefeab6-59a6-4eaa-9cb3-ab511c13a243}</Project>
+      <Name>CompanyModelProject.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CompanyModelProject.IServices\CompanyModelProject.IServices.csproj">
+      <Project>{688803b1-7029-4dfa-be00-21ab9de5a375}</Project>
+      <Name>CompanyModelProject.IServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CompanyModelProject.Model\CompanyModelProject.Model.csproj">
+      <Project>{32adf3dc-5c1f-4fde-84d2-e7cc22c175ce}</Project>
+      <Name>CompanyModelProject.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
