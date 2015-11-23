@@ -9,7 +9,7 @@ namespace CompanyModelProject.Model
     {
         public int ID { get; set; }
         public int ColumnId { get; set; }
-      
+        public string HtmlUrl { get; set; }
         public string Title { get; set; }
      
         public int orders { get; set; }

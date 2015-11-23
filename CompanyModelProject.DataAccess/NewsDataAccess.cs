@@ -334,7 +334,7 @@ namespace CompanyModelProject.DataAccess
             string strProc = "[PKG_PageData]";//存储过程名
             string sTable = " [dbo].[News] t1 inner join [dbo].[ColName] t2 on t1.ColumnId=t2.ID "; 
             string sPkey = " t1.ID";
-            string sField = "t1.ID,[ColumnId] ,t2.ColumnName as Name,[Title],t1.[orders] ,[Creater] ,[CreateTime] ,[IsClomnrecommond] ,[IsIndexRecommond] ,t1.[IsDel]";//
+            string sField = "t1.ID,[ColumnId] ,t2.ColumnName as Name,[Title],t1.[orders] ,HtmlUrl,[Creater] ,[CreateTime] ,[IsClomnrecommond] ,[IsIndexRecommond] ,t1.[IsDel]";//
             StringBuilder sb = new StringBuilder();
             sb.Append(" t1.isDel=0");
             sb.Append(" and t2.isDel=0"); 
@@ -395,7 +395,8 @@ namespace CompanyModelProject.DataAccess
             item.Title = row.IsNull("Title") ? string.Empty : row.Field<string>("Title"); 
             item.ColumnId = row.IsNull("ColumnId") ? 0 : row.Field<int>("ColumnId");
             item.Creater = row.IsNull("Creater") ? string.Empty : row.Field<string>("Creater");
-            item.Name = row.IsNull("Name") ? string.Empty : row.Field<string>("Name"); 
+            item.Name = row.IsNull("Name") ? string.Empty : row.Field<string>("Name");
+            item.HtmlUrl = row.IsNull("HtmlUrl") ? string.Empty : row.Field<string>("HtmlUrl");  
             item.CreateTime = row.IsNull("CreateTime") ? DateTime.Now : row.Field<DateTime>("CreateTime");
             item.orders = row.IsNull("orders") ? 0 : row.Field<int>("orders");
             item.IsClomnrecommond = row.IsNull("IsClomnrecommond") ? false : true;
