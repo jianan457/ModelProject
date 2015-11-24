@@ -17,6 +17,8 @@ namespace CompanyModelProject.IServices
         int Delete(int id);
         int update(NewsModel model);
         int del_list(string where);
+
+        List<NewsWebModel> getTopList(int count, int columnid);
         int update_delete(NewsModel model);
         /// <summary>
         /// select one
@@ -28,8 +30,8 @@ namespace CompanyModelProject.IServices
         List<NewsModel> getlist();
         List<NewsModel> getlistbycolId(int colID);
         List<pageModel> GetPageList(int pageIndex, int pageSize, ref int allcount, ref int pagecount, string strwhere);
-        
-       
+
+        List<NewsWebModel> GetwebPageList(int pageIndex, int pageSize, ref int allcount, ref int pagecount, string strwhere);
          
     }
 }
