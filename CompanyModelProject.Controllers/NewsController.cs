@@ -47,8 +47,6 @@ namespace CompanyModelProject.Controllers
             ViewBag.RightsId = RightsId; 
             ViewBag.liId = "columnli4";
             ViewBag.admin = LoginName;
-            //ViewBag.keys = KeyWords;
-            //ViewBag.dec = Description;
             ViewBag.title = Title;
             List<ColumnModel> fristlist = service.getFristColumnlist_Index();//一级 
             ViewData["fristlist"] = new SelectList(fristlist, "ID", "ColumnName");
@@ -56,7 +54,7 @@ namespace CompanyModelProject.Controllers
             string colid = RequestQueryString.GetQueryString("upid", "");
             string levl = RequestQueryString.GetQueryString("levl", "");
             string key = RequestQueryString.GetQueryString("key", "");
-            int size = 2;
+            int size = 20;
             int total = 0;
             int count = 0;
             string strwhere = null;
@@ -204,7 +202,24 @@ namespace CompanyModelProject.Controllers
             }
             return Json(new { code = 1, message = "fail" }, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult UploadEditorImgHandler()
+        {
+            HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
 
+            string imgPath = "";
+            string filepath = "";
+            string filename = "";//文件名字
+            if (hfc.Count > 0)
+            {
+                string ex = System.IO.Path.GetExtension(hfc[0].FileName).ToLower();//文件扩展名 
+                filepath = "/Upload/EditorNewsImg/";
+                    filename = System.DateTime.Now.ToString("yyyyMMddHHmmss") + ex;
+                imgPath = Server.MapPath(filepath + filename);
+                hfc[0].SaveAs(imgPath);
+                return Json(new { error = 0, message = "上传成功", url = filepath + filename });
+            }
+            return Json(new { code = "1", message = "上传失败", url = "" }); 
+        }
 
         public ActionResult NewsModtify(int id)
         {
@@ -304,7 +319,6 @@ namespace CompanyModelProject.Controllers
                 {
                     return Json(new { code = 2, message = "删除失败！" }, JsonRequestBehavior.AllowGet);
                 }
-           
         }
     }
 }
