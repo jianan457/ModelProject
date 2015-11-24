@@ -58,7 +58,16 @@ namespace CompanyModelProject.Services
         {
             return access.getlistbycolId(colID);
         }
-    
+        /// <summary>
+        /// 得到专题的前count条数据
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="columnid"></param>
+        /// <returns></returns>
+        public List<NewsWebModel> getTopList(int count, int columnid)
+        {
+            return access.getTopList(count, columnid);
+       }
         public  int update_delete(NewsModel model)
         {
             return access.update_delete(model);
@@ -70,6 +79,10 @@ namespace CompanyModelProject.Services
         public List<pageModel> GetPageList(int pageIndex, int pageSize, ref int allcount, ref int pagecount, string strwhere)
         {
             return access.GetPageList(pageIndex, pageSize, ref allcount, ref pagecount, strwhere);
+        }
+        public List<NewsWebModel> GetwebPageList(int pageIndex, int pageSize, ref int allcount, ref int pagecount, string strwhere)
+        {
+            return access.GetwebPageList(pageIndex, pageSize, ref allcount, ref pagecount, strwhere);
         }
     }
 }
