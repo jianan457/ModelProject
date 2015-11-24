@@ -60,7 +60,7 @@ namespace CompanyModelProject.Controllers
             AdminInfoModel m = service.getLoginInfo(model.AdminName, model.Pwd);
             if (m != null)
             {
-               
+
                 Common.CookieManager cm = new Common.CookieManager();
                 cm.setCookie("userinfo", "name=" + m.AdminName + "&Id=" + m.ID + "&email=" + m.Email, DateTime.Now.AddHours(2), "www.model.com", "/");
 
@@ -101,42 +101,61 @@ namespace CompanyModelProject.Controllers
         public ActionResult UserList()
         {
             ViewBag.RightsId = RightsId;
-            ViewBag.liId = "columnli6";
-            ViewBag.admin = LoginName;
-            ViewBag.title = Title;
-            List<AdminInfoModel> list = service.GetList();
-            if (list != null)
+            if (RightsId.Contains("6"))
             {
-                ViewBag.data = list;
+                ViewBag.liId = "columnli6";
+                ViewBag.admin = LoginName;
+                ViewBag.title = Title;
+                List<AdminInfoModel> list = service.GetList();
+                if (list != null)
+                {
+                    ViewBag.data = list;
+                }
+                else
+                {
+                    ViewBag.data = null;
+                    ViewBag.mes = "暂无数据";
+                }
+                return View();
             }
             else
             {
-                ViewBag.data = null;
-                ViewBag.mes = "暂无数据";
+                return RedirectToAction("../Manager/Index");
             }
-            return View();
+
         }
         [UserLoginFilter]
         public ActionResult pwdModtify(int Id)
         {
+
             ViewBag.RightsId = RightsId;
-            ViewBag.liId = "columnli6";
-            ViewBag.admin = LoginName;
-            ViewBag.title = Title;
             if (Id != 0)
             {
+                ViewBag.liId = "columnli6";
+                ViewBag.admin = LoginName;
+                ViewBag.title = Title;
                 ViewBag.UId = Id;
             }
             else
             {
-                return RedirectToAction("UserList");//返回到列表
+                if (RightsId.Contains("6"))
+                {
+                    return RedirectToAction("UserList");//返回到列表
+                }
+                else
+                {
+                    return RedirectToAction("../Manager/Index");
+                }
+
             }
             return View();
+
         }
         [UserLoginFilter]
         public ActionResult UserModtify(int id)
         {
-            ViewBag.RightsId = RightsId; 
+            ViewBag.title = Title;
+            ViewBag.RightsId = RightsId;
             ViewBag.liId = "columnli6";
             ViewBag.admin = LoginName;
             ViewBag.title = Title;
@@ -151,12 +170,8 @@ namespace CompanyModelProject.Controllers
         [AllowAnonymous]
         public ActionResult UserModtify(AdminInfoModel model)
         {
-            if (ModelState.IsValid)
-            {
-                int result = service.update(model);
-                return RedirectToAction("UserList");
-            }
-            return View();
+            int result = service.update(model);
+            return RedirectToAction("UserModtify");
         }
 
         [HttpPost]
@@ -200,8 +215,8 @@ namespace CompanyModelProject.Controllers
         [UserLoginFilter]
         public ActionResult RightsAdd(int Id)
         {
-            ViewBag.RightsId = RightsId; 
-            RightsServices rights = new RightsServices(); 
+            ViewBag.RightsId = RightsId;
+            RightsServices rights = new RightsServices();
             if (Id != 0)
             {
                 ViewBag.liId = "columnli6";
@@ -231,42 +246,42 @@ namespace CompanyModelProject.Controllers
 
         public ActionResult AddRightsHandler()
         {
-         
+
             string userid = RequestQueryString.GetQueryString("userid");
             string rightids = RequestQueryString.GetQueryString("v");
-            int r=0;
-            if (rightids != "" && rightids != null && userid!=null)
+            int r = 0;
+            if (rightids != "" && rightids != null && userid != null)
             {
                 rightids = rightids.Substring(0, rightids.Length - 1);
                 RightsOfUserModel model = new RightsOfUserModel();
                 model.UserId = int.Parse(userid);
                 model.RightIds = rightids;
-             List<RightsOfUserModel> list = rou.GetList();
-             if (list != null && list.Count > 0)
-             {
-                 List<RightsOfUserModel> newlist = list.Where(o => o.UserId == int.Parse(userid)).ToList();
-                 if (newlist != null && newlist.Count > 0)
-                 {
-                     model.ID = newlist[0].ID;
-                     r = rou.update(model);
-                 }
-                 else
-                 {
-                     r = rou.Insert(model);
-                 }
-             }
-             else
-             {
-                 r = rou.Insert(model);
-             }
-             if (r != 0)
-             {
-                 return Json(new { code = 0, message = "操作成功" }, JsonRequestBehavior.AllowGet);
-             }
-             else
-             {
-                 return Json(new { code = 1, message = "操作失败" }, JsonRequestBehavior.AllowGet);
-             }
+                List<RightsOfUserModel> list = rou.GetList();
+                if (list != null && list.Count > 0)
+                {
+                    List<RightsOfUserModel> newlist = list.Where(o => o.UserId == int.Parse(userid)).ToList();
+                    if (newlist != null && newlist.Count > 0)
+                    {
+                        model.ID = newlist[0].ID;
+                        r = rou.update(model);
+                    }
+                    else
+                    {
+                        r = rou.Insert(model);
+                    }
+                }
+                else
+                {
+                    r = rou.Insert(model);
+                }
+                if (r != 0)
+                {
+                    return Json(new { code = 0, message = "操作成功" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { code = 1, message = "操作失败" }, JsonRequestBehavior.AllowGet);
+                }
             }
             return Json(new { code = 2, message = "数据异常" }, JsonRequestBehavior.AllowGet);
         }
@@ -275,12 +290,12 @@ namespace CompanyModelProject.Controllers
         {
 
             string userid = RequestQueryString.GetQueryString("v");
-         
+
             List<RightsOfUserModel> list = rou.GetList();
-            if (list!=null&&list.Count>0)
+            if (list != null && list.Count > 0)
             {
-                List<RightsOfUserModel>  model = list.Where(o => o.UserId == int.Parse(userid)).ToList();
-                if (model!=null&&model.Count>0)
+                List<RightsOfUserModel> model = list.Where(o => o.UserId == int.Parse(userid)).ToList();
+                if (model != null && model.Count > 0)
                 {
                     string re = model[0].RightIds;
                     return Json(new { code = 0, data = re }, JsonRequestBehavior.AllowGet);
