@@ -348,6 +348,7 @@
     <Content Include="Scripts\jquery.gvChart-1.0.1.min.js" />
     <Content Include="Scripts\jquery.idTabs.min.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="WebHtml\NewsTemple.html" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -396,7 +397,6 @@
     <Folder Include="Models\" />
     <Folder Include="Upload\EditorNewsImg\" />
     <Folder Include="Upload\News\" />
-    <Folder Include="WebHtml\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
