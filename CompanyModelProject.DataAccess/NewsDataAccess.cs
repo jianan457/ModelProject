@@ -71,7 +71,21 @@ namespace CompanyModelProject.DataAccess
       ,[IsDel]
        FROM [HtmlManagement].[dbo].[News] with(nolock) where ColumnId=@ColumnId and isDel=0";
 
-
+        /// <summary>
+        /// 查询某个栏目前几条数据
+        /// </summary>
+        public const string SQL_SELECT_TOP = @"SELECT TOP @COUNT [ID]
+      ,[ColumnId]
+      ,[Title]
+      ,[picUrl] 
+      ,[BriefMain] 
+      ,[HtmlUrl]
+      ,[orders] 
+      ,[CreateTime]
+      ,[IsClomnrecommond]
+      ,[IsIndexRecommond]
+      ,[IsDel]
+       FROM [HtmlManagement].[dbo].[News] with(nolock) where ColumnId=@ColumnId and isDel=0";
         public const string SQL_UPDATE = @"UPDATE [dbo].[News] 
        SET [ColumnId] = @ColumnId 
       ,[Title] = @Title 
@@ -300,8 +314,7 @@ namespace CompanyModelProject.DataAccess
         {
             List<NewsModel> list = new List<NewsModel>();
             SqlParameter[] paras = { 
-                                       new SqlParameter("@ColumnId",SqlDbType.NVarChar)
-                                        
+                                       new SqlParameter("@ColumnId",SqlDbType.NVarChar) 
                                    };
             paras[0].Value = colID;
             DataSet ds = DbHelper.GetInstance(ConnectionStringUtility.ConnectionString).ExecuteDataset(CommandType.Text, SQL_SELECT_Col, paras);
@@ -310,6 +323,36 @@ namespace CompanyModelProject.DataAccess
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
                     list.Add(RowToModel(dr));
+                }
+            }
+            else
+            {
+                list = null;
+            }
+            return list;
+        }
+
+      /// <summary>
+      /// 查询某个栏目的钱COUNT条数据
+      /// </summary>
+      /// <param name="count"></param>
+      /// <param name="columnid"></param>
+      /// <returns></returns>
+        public List<NewsWebModel> getTopList(int count,int columnid)
+        {
+            List<NewsWebModel> list = new List<NewsWebModel>();
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@ColumnId",SqlDbType.NVarChar), 
+                                       new SqlParameter("@COUNT",SqlDbType.NVarChar) 
+                                   };
+            paras[0].Value = columnid;
+            paras[1].Value = count; 
+            DataSet ds = DbHelper.GetInstance(ConnectionStringUtility.ConnectionString).ExecuteDataset(CommandType.Text, SQL_SELECT_TOP, paras);
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    list.Add(newsWebRowToModel(dr));
                 }
             }
             else
@@ -367,6 +410,56 @@ namespace CompanyModelProject.DataAccess
             return pagelist;
 
         }
+
+
+        /// <summary>
+        /// 获取页面分页数据
+        /// </summary>
+
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="allcount"></param>
+        /// <param name="pagecount"></param>
+        /// <returns></returns>
+        public List<NewsWebModel> GetwebPageList(int pageIndex, int pageSize, ref int allcount, ref int pagecount, string strwhere)
+        {
+            DateTime date = DateTime.Now;
+            List<NewsWebModel> pagelist = new List<NewsWebModel>();
+            string strProc = "[PKG_PageData]";//存储过程名
+            string sTable = " [dbo].[News]";
+            string sPkey = " ID";
+            string sField = "ID,[ColumnId] ,[Title],[orders] ,HtmlUrl,[Creater] ,[CreateTime] ,[IsClomnrecommond] ,[IsIndexRecommond] ,[IsDel]";//
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" isDel=0");
+            if (strwhere != null && strwhere != "")
+            {
+                sb.Append(strwhere);
+            }
+            string sCondition = sb.ToString();
+            string sOrder = " orders ";
+            SqlParameter[] paras = new[]{ new SqlParameter(){ParameterName="@sTable",SqlDbType=SqlDbType.VarChar,Value=sTable}, 
+                                          new SqlParameter(){ParameterName="@sPkey", SqlDbType=SqlDbType.VarChar,Value=sPkey},
+                                          new SqlParameter( ){ParameterName="@sField", SqlDbType=SqlDbType.VarChar,Value=sField}, 
+                                          new SqlParameter(){ ParameterName="@iPageCurr",SqlDbType = SqlDbType.Int,Value=pageIndex},
+                                          new SqlParameter(){ParameterName="@iPageSize", SqlDbType=SqlDbType.Int,Value=pageSize} ,
+                                          new SqlParameter(){ParameterName="@sCondition", SqlDbType=SqlDbType.VarChar,Value=sCondition},  
+                                          new SqlParameter(){ParameterName="@sOrder", SqlDbType=SqlDbType.VarChar,Value=sOrder}, 
+                                          new SqlParameter(){ParameterName="@Counts", SqlDbType=SqlDbType.Int,Direction = ParameterDirection.Output}, 
+                                          new SqlParameter(){ParameterName="@pageCount", SqlDbType=SqlDbType.Int,Direction = ParameterDirection.Output},
+                                          new SqlParameter(){ParameterName="@nowDate", SqlDbType=SqlDbType.DateTime,Value=date}
+                                   };
+            DataSet ds = DbHelper.GetInstance(ConnectionStringUtility.ConnectionString).ExecuteDataset(CommandType.StoredProcedure, strProc, paras);//执行存储过程 
+            if (ds == null || ds.Tables[0].Rows.Count == 0) return null;
+
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                pagelist.Add(newsWebRowToModel(dr));
+            }
+            allcount = int.Parse(paras[7].Value.ToString());
+            pagecount = (int)Math.Ceiling(double.Parse(allcount.ToString()) / pageSize);
+            return pagelist;
+
+        }
         private static NewsModel RowToModel(DataRow row)
         {
             var item = new NewsModel();
@@ -402,6 +495,22 @@ namespace CompanyModelProject.DataAccess
             item.IsClomnrecommond = row.IsNull("IsClomnrecommond") ? false : true;
             item.IsIndexRecommond = row.IsNull("IsIndexRecommond") ? false : true;
             item.isDel = row.IsNull("isDel") ? false : true; 
+            return item;
+        }
+
+        private static NewsWebModel newsWebRowToModel(DataRow row)
+        {
+            var item = new NewsWebModel();
+            item.ID = row.IsNull("ID") ? 0 : row.Field<int>("Id");
+            item.Title = row.IsNull("Title") ? string.Empty : row.Field<string>("Title");
+            item.ColumnId = row.IsNull("ColumnId") ? 0 : row.Field<int>("ColumnId"); 
+            item.HtmlUrl = row.IsNull("HtmlUrl") ? string.Empty : row.Field<string>("HtmlUrl");
+            item.BriefMain = row.IsNull("BriefMain") ? string.Empty : row.Field<string>("BriefMain"); 
+            item.CreateTime = row.IsNull("CreateTime") ? DateTime.Now : row.Field<DateTime>("CreateTime");
+            item.orders = row.IsNull("orders") ? 0 : row.Field<int>("orders");
+            item.IsClomnrecommond = row.IsNull("IsClomnrecommond") ? false : true;
+            item.IsIndexRecommond = row.IsNull("IsIndexRecommond") ? false : true;
+            item.isDel = row.IsNull("isDel") ? false : true;
             return item;
         }
 
