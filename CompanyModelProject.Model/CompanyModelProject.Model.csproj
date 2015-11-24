@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NewsWebModel.cs" />
     <Compile Include="RightsOfUserModel.cs" />
     <Compile Include="RightsModel.cs" />
     <Compile Include="AdminInfoModel.cs" />
