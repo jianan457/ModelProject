@@ -86,13 +86,21 @@
     </div>
 
 </div>
-<script type="text/javascript" src="/editor/kindeditor.js"></script>
+<script type="text/javascript" src="/editor/kindeditor-min.js"></script>
+<script src="~/editor/lang/zh_CN.js"></script>
+<link href="~/editor/themes/default/default.css" rel="stylesheet" />
 <script type="text/javascript">
-    KE.show({
-        id: 'content7',
-        cssPath: './index.css'
+
+    KindEditor.ready(function (K) {
+        var editor1 = K.create('#content7', {
+            cssPath: '/editor/plugins/code/prettify.css',
+            allowUpload: true,
+            uploadJson: '/News/UploadEditorImgHandler'
+        });
+
     });
 </script>
+ 
 <script type="text/javascript">
     $("#usual1 ul").idTabs();
 </script>
