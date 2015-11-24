@@ -124,7 +124,6 @@
     <Content Include="Content\select.css" />
     <Content Include="Content\style.css" />
     <Content Include="editor\kindeditor-min.js" />
-    <Content Include="editor\kindeditor.js" />
     <Content Include="editor\lang\zh_CN.js" />
     <Content Include="editor\plugins\anchor\anchor.js" />
     <Content Include="editor\plugins\autoheight\autoheight.js" />
