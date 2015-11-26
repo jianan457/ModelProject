@@ -165,14 +165,8 @@ namespace CompanyModelProject.Controllers
                 {
                     if (item != "")
                     {
-                        int r = service.Delete(int.Parse(item));
-                        if (r == 0)
-                        {
-                            return Json(new { code = 1, message = "操作失败！" }, JsonRequestBehavior.AllowGet);
-                        }
-
-                    }
-
+                        int r = service.Delete(int.Parse(item)); 
+                    } 
                 }
                 return Json(new { code = 0, message = "操作成功,已删除" }, JsonRequestBehavior.AllowGet);
 

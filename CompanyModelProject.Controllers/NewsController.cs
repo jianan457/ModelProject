@@ -7,6 +7,7 @@ using CompanyModelProject.Model;
 using CompanyModelProject.Services;
 using CompanyModelProject.Common;
 using System.Web;
+using System.IO;
 namespace CompanyModelProject.Controllers
 {
     public class NewsController : BaseController
@@ -32,12 +33,22 @@ namespace CompanyModelProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.Creater = LoginName;
-                int r = newsService.Insert(model);
-                if (r!=0)
-                {
-                    return RedirectToAction("NewsList");
-                }
+                model.Creater = LoginName; 
+                 string htmlurl= FileToHtml.WriteFile(model.Title, model.Main, model.CreateTime.ToString());//生成静态文件
+                 if (htmlurl!=null)
+                    {
+                        model.HtmlUrl = htmlurl;
+                        int r = newsService.Insert(model);//加入数据库
+                        if (r!=0)
+                        {
+                            return RedirectToAction("NewsList");
+                        }
+                        else
+                        {
+                            return RedirectToAction("AddNews");
+                        }
+                    }
+                    
             }
             return View();
         }
@@ -92,7 +103,6 @@ namespace CompanyModelProject.Controllers
                         }
                         colids = sbcolId.ToString().Substring(0, sbcolId.Length - 1);
                         strwhere += " and ColumnId in (" + colids + ")";
-
                     } 
                 }
                 if (int.Parse(levl) == 2)///三级
@@ -205,7 +215,6 @@ namespace CompanyModelProject.Controllers
         public ActionResult UploadEditorImgHandler()
         {
             HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
-
             string imgPath = "";
             string filepath = "";
             string filename = "";//文件名字
@@ -271,13 +280,23 @@ namespace CompanyModelProject.Controllers
         public ActionResult NewsModtify(NewsModel model)
         {
             model.Creater = LoginName;
-            int result = newsService.update(model);
-            if (result != 0)
-            {
-                ///修改成功之后  
-                return RedirectToAction("NewsList");//返回到列表
-            }
-            return RedirectToAction("NewsModtify");
+           string htmlurl= FileToHtml.WriteFile(model.Title, model.Main, model.CreateTime.ToString());//生成静态文件
+           if (htmlurl != null)
+           {
+               model.HtmlUrl = htmlurl;
+               int result = newsService.update(model);//修改如数据库
+               if (result != 0)
+               {
+                   ///修改成功之后  
+                   return RedirectToAction("NewsList");//返回到列表
+               }
+               else
+               {
+                   return RedirectToAction("NewsModtify");
+
+               }
+           }
+            return View();
         }
 
         public ActionResult DelNewsHandler()
@@ -319,6 +338,163 @@ namespace CompanyModelProject.Controllers
                 {
                     return Json(new { code = 2, message = "删除失败！" }, JsonRequestBehavior.AllowGet);
                 }
+        }
+
+        /// <summary>
+        /// 首页生成静态页
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult IndexToHtml()
+        {
+            ViewBag.RightsId = RightsId;
+            ViewBag.admin = LoginName;
+            ViewBag.title = Title;
+            ViewBag.liId = "columnli11";
+            return View();
+        }
+        public ActionResult CreatHtmlHandler()
+        {
+            ///新闻动态
+            List<NewsWebModel> list1 = newsService.getTopList(5, 18, " and IsIndexRecommond=1");
+            StringBuilder sb1 = new StringBuilder();
+            if (list1!=null&&list1.Count>0)
+            {
+                for (int i = 0; i < list1.Count; i++)
+                {
+                    ///拼接html
+                }
+            }
+            //教务公告
+            List<NewsWebModel> list2 = newsService.getTopList(8, 34, " and IsIndexRecommond=1");
+            StringBuilder sb2 = new StringBuilder();
+            if (list2 != null && list2.Count > 0)
+            {
+                for (int i = 0; i < list2.Count; i++)
+                {
+                    ///拼接html
+                }
+            }
+            //简介
+            List<NewsWebModel> list3 = newsService.getTopList(1, 20, "");
+            StringBuilder sb3 = new StringBuilder();
+            if (list3 != null && list3.Count > 0)
+            {
+                for (int i = 0; i < list3.Count; i++)
+                {
+                    ///拼接html
+                }
+            }
+            //学员风采
+            List<NewsWebModel> list4 = newsService.getTopList(6, 36, "");
+            StringBuilder sb4 = new StringBuilder();
+            if (list4 != null && list4.Count > 0)
+            {
+                for (int i = 0; i < list4.Count; i++)
+                {
+                    ///拼接html
+                }
+            }
+            //学员企业
+            List<NewsWebModel> list5 = newsService.getTopList(6, 37, "");
+            StringBuilder sb5 = new StringBuilder();
+            if (list5 != null && list5.Count > 0)
+            {
+                for (int i = 0; i < list5.Count; i++)
+                {
+                    ///拼接html
+                }
+            }
+            //管理资讯
+            List<NewsWebModel> list6 = newsService.getTopList(6, 38, "");
+            StringBuilder sb6 = new StringBuilder();
+            if (list6 != null && list6.Count > 0)
+            {
+                for (int i = 0; i < list6.Count; i++)
+                {
+                    ///拼接html
+                }
+            }
+            //名师介绍(图片)
+            List<NewsWebModel> list7 = newsService.getTopList(6, 35, " and IsIndexRecommond=1");
+            StringBuilder sb7 = new StringBuilder();
+            if (list7 != null && list7.Count > 0)
+            {
+                for (int i = 0; i < list7.Count; i++)
+                {
+                    ///拼接html
+                }
+                
+            }
+            //新闻图片(图片)
+            List<NewsWebModel> list8 = newsService.getTopList(6, 41, "");
+            StringBuilder sb8 = new StringBuilder();
+            if (list8 != null && list8.Count > 0)
+            {
+                for (int i = 0; i < list8.Count; i++)
+                {
+                    ///拼接html
+                }
+            }
+            bool issucess = indextofile(sb1.ToString(), sb2.ToString(), sb3.ToString(), sb4.ToString(), sb5.ToString(), sb6.ToString(), sb7.ToString(), sb8.ToString());
+            if (issucess)
+            {
+                  return Json(new { code = 0, message = "首页已生成！" }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { code = 1, message = "首页生成失败！" }, JsonRequestBehavior.AllowGet);
+            }
+          
+        }
+        private bool indextofile(string sb1, string sb2, string sb3, string sb4, string sb5, string sb6, string sb7, string sb8)
+        {
+            string path = Server.MapPath("/Index.html");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);///创建文件夹
+            }
+            Encoding code = Encoding.GetEncoding("gb2312");
+            // 读取模板文件
+            string temp = Server.MapPath("/Temple/Index.html");
+            StreamReader sr = null;
+            StreamWriter sw = null;
+            string str = "";
+            try
+            {
+                sr = new StreamReader(temp, code);
+                str = sr.ReadToEnd(); // 读取文件
+            }
+            catch (Exception exp)
+            {
+                Response.Write(exp.Message);
+                Response.End();
+                sr.Close();
+            }
+           
+            str = str.Replace("newslist1", sb1);
+            str = str.Replace("newslist2", sb2);
+            str = str.Replace("newslist3", sb3);
+            str = str.Replace("newslist4", sb4);
+            str = str.Replace("newslist5", sb5);
+            str = str.Replace("newslist6", sb6);
+            str = str.Replace("newslist7", sb7);
+            str = str.Replace("newslist8", sb8);
+            try
+            {
+                sw = new StreamWriter(path , false, code);
+                sw.Write(str);
+                sw.Flush();
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex.Message);
+                Response.End();
+            }
+            finally
+            {
+                sw.Close();
+            }
+            return true;
         }
     }
 }
