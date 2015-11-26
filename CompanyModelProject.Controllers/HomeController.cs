@@ -12,7 +12,7 @@ namespace CompanyModelProject.Controllers
     public class HomeController : BaseController
     {
         NewsServices news = new NewsServices();
-        [UserLoginFilter]
+        
         public ActionResult Index()
         {
              ViewBag.keys = KeyWords;
@@ -20,6 +20,11 @@ namespace CompanyModelProject.Controllers
             ViewBag.title = Title;
             //新闻动态（1+4）
             List<NewsWebModel> list1 = news.getTopList(5, 18, " and IsIndexRecommond=1");
+            if (list1!=null&&list1.Count>0)
+            {
+                ViewBag.news = list1;
+            }
+
             //教务公告
             if (getStudy() != null && getStudy().Count > 0)
             {
@@ -31,6 +36,15 @@ namespace CompanyModelProject.Controllers
             }
             //简介
             List<NewsWebModel> list3 = news.getTopList(1, 20, "");
+            if (list3!=null&&list3.Count>0)
+            {
+                ViewBag.dection = list3[0].BriefMain;
+                ViewBag.dectionimg = list3[0].picUrl;
+            }
+            else
+            {
+                ViewBag.dectionmsg = "暂无数据";
+            }
             //学员风采
             List<NewsWebModel> list4 = news.getTopList(6, 36, "");
             //学员企业
