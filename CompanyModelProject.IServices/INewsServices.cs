@@ -18,7 +18,7 @@ namespace CompanyModelProject.IServices
         int update(NewsModel model);
         int del_list(string where);
 
-        List<NewsWebModel> getTopList(int count, int columnid);
+        List<NewsWebModel> getTopList(int count, int columnid,string where);
         int update_delete(NewsModel model);
         /// <summary>
         /// select one
@@ -28,7 +28,7 @@ namespace CompanyModelProject.IServices
         NewsModel GetModel(int Id);
 
         List<NewsModel> getlist();
-        List<NewsModel> getlistbycolId(int colID);
+        List<NewsWebModel> getlistbycolId(int colID);
         List<pageModel> GetPageList(int pageIndex, int pageSize, ref int allcount, ref int pagecount, string strwhere);
 
         List<NewsWebModel> GetwebPageList(int pageIndex, int pageSize, ref int allcount, ref int pagecount, string strwhere);

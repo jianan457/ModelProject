@@ -9,12 +9,16 @@ namespace CompanyModelProject.Common
 {
     public class FileToHtml
     {
-        public static bool WriteFile(string strText, string strContent, string strAuthor)
+        public static string WriteFile(string strTitle, string strContent, string datetime)//文章详情
         {
-            string path = HttpContext.Current.Server.MapPath("/WebHtml/");
+            string path = HttpContext.Current.Server.MapPath("/WebHtml/" + DateTime.Now.ToString("yyyyMMdd"));
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);///创建文件夹
+            } 
             Encoding code = Encoding.GetEncoding("gb2312");
             // 读取模板文件
-            string temp = HttpContext.Current.Server.MapPath("/WebHtml/text.html");
+            string temp = HttpContext.Current.Server.MapPath("/Temple/NewsTemple.html");
             StreamReader sr = null;
             StreamWriter sw = null;
             string str = "";
@@ -32,10 +36,10 @@ namespace CompanyModelProject.Common
             string htmlfilename = DateTime.Now.ToString("yyyyMMddHHmmss") + ".html";
             // 替换内容
             // 这时,模板文件已经读入到名称为str的变量中了
-            str = str.Replace("ShowArticle", strText); //模板页中的ShowArticle
-            str = str.Replace("biaoti", strText);
+            //str = str.Replace("Title", strTitle); //模板页中的ShowArticle
+            str = str.Replace("biaoti", strTitle);
             str = str.Replace("content", strContent);
-            str = str.Replace("author", strAuthor);
+            str = str.Replace("author", datetime);
             // 写文件
             try
             {
@@ -52,7 +56,10 @@ namespace CompanyModelProject.Common
             {
                 sw.Close();
             }
-            return true;
+            return path + htmlfilename;
         }
+
+
+       
     }
 }

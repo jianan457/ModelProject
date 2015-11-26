@@ -9,7 +9,7 @@
 <div class="place">
     <span>位置：</span>
     <ul class="placeul">
-        <li><a href="/Manager/Index">首页</a></li> 
+        <li><a href="/Manager/Index">首页</a></li>
         <li><a href="#">添加内容</a></li>
     </ul>
 </div>
@@ -36,7 +36,7 @@
                 <li id="ThirdColli" style="display:none;">
                     <label>三级栏目</label><select id="ThirdCol" name="ThirdCol" class="dfinput" onchange="setColId(this.value)"></select>
                 </li>
-               
+
             </ul>
         </div>
 
@@ -59,7 +59,6 @@
                     </li>
                     <li><label>引用地址</label>@Html.TextBoxFor(Model => Model.fromUrl, new { @class = "dfinput" })</li>
                     <li><label>内容摘要</label>@Html.TextAreaFor(Model => Model.BriefMain, new { @class = "dfinput", @style = "width:500px;height:60px;" })</li>
-
                     <li>
                         <label>文章内容<b>*</b></label>
                         @Html.TextAreaFor(Model => Model.Main, new { @id = "content7", @style = "width:700px;height:250px;visibility:hidden;" })
@@ -76,7 +75,7 @@
                     </li>
                     <li>@Html.HiddenFor(Model => Model.ColumnId)</li>
                     <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确认保存" /></li>
-                </ul> 
+                </ul>
             }
         </div>
 
@@ -87,34 +86,34 @@
 <script src="~/editor/lang/zh_CN.js"></script>
 <link href="~/editor/themes/default/default.css" rel="stylesheet" />
 <script type="text/javascript">
-   
+
     KindEditor.ready(function (K) {
         var editor1 = K.create('#content7', {
             cssPath: '/editor/plugins/code/prettify.css',
             allowUpload: true,
-            uploadJson: '/News/UploadEditorImgHandler'  
+            uploadJson: '/News/UploadEditorImgHandler'
         });
-      
-    }); 
-</script> 
+
+    });
+</script>
 <script type="text/javascript">
     $("#usual1 ul").idTabs();
 </script>
 
 <script>
-    $(function () { 
-        var id = '@ViewBag.liId';  
+    $(function () {
+        var id = '@ViewBag.liId';
         $(".menuson").hide();
         $("#" + id).addClass("active");
         $("#" + id).parent().show();
-        var option = '<option value="0">请选择</option>'; 
-        $.get('/News/fristHandler?date=' + new Date(), { }, function (data) {
-            if (data.code == 0) { 
+        var option = '<option value="0">请选择</option>';
+        $.get('/News/fristHandler?date=' + new Date(), {}, function (data) {
+            if (data.code == 0) {
                 var obj = eval(data.data);
                 for (var i = 0; i < obj.length; i++) {
                     option += ' <option value="' + obj[i].Id + '">' + obj[i].columnName + '</option>';
                 }
-                $("#FriCol").html(option);  
+                $("#FriCol").html(option);
             }
             else { $("#FriCol").html(option); }
         });

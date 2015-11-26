@@ -19,8 +19,6 @@
         <li><a href="#">内容管理列表</a></li>
     </ul>
 </div>
-
-
 <div class="tools">
     <ul class="toolbar">
         <li><span onclick="addNews()"><img src="/images/t01.png" /></span>添加内容</li>
@@ -82,7 +80,7 @@
                     <td>@item.Creater</td>
                     <td>@item.CreateTime</td>
                     <td>@(item.IsIndexRecommond==true?"是":"否")</td>
-                    <td><a href="#" class="tablelink" onclick="editNews(@item.ID)">编辑</a> | <a href="#" class="tablelink" onclick="delNews(@item.ID)"> 删除</a> </td>
+                    <td><a href="#" class="tablelink" onclick="editNews(@item.ID)">编辑</a> | <a href="#" class="tablelink" onclick="delNews(@item.ID)"> 删除</a></td>
                 </tr>
             }
         }
@@ -102,39 +100,18 @@
             <p>是否确认删除信息 ？</p>
             <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
         </div>
-    </div>
-
+    </div> 
     <div class="tipbtn">
         <input name="" type="button" class="sure" value="确定" />&nbsp;
         <input name="" type="button" class="cancel" value="取消" />
-    </div>
-
+    </div> 
 </div>
-
-@*<div class="pagin">
-    <div class="message">
-        共<i class="blue">1256</i>条记录，当前显示第&nbsp;<i class="blue">2&nbsp;</i>页
-
-        <ul class="paginList">
-            <li class="paginItem"><a href="javascript:;"><span class="pagepre"></span></a></li>
-            <li class="paginItem"><a href="javascript:;">1</a></li>
-            <li class="paginItem current"><a href="javascript:;">2</a></li>
-            <li class="paginItem"><a href="javascript:;">3</a></li>
-            <li class="paginItem"><a href="javascript:;">4</a></li>
-            <li class="paginItem"><a href="javascript:;">5</a></li>
-            <li class="paginItem more"><a href="javascript:;">...</a></li>
-            <li class="paginItem"><a href="javascript:;">10</a></li>
-            <li class="paginItem"><a href="javascript:;"><span class="pagenxt"></span></a></li>
-        </ul>
-    </div>
-</div>*@
 @if (ViewBag.Url != null)
 {
     @Helpers.RenderPageControl(ViewBag.Url, ViewBag.PageIndex - 1)
 }
 <script>
     $(function () {
-       
         selectall('news'); ///全选
         var id = '@ViewBag.liId';
         $(".menuson").hide();

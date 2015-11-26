@@ -316,20 +316,8 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="images\1.png" />
-    <Content Include="images\2.png" />
-    <Content Include="images\3.png" />
-    <Content Include="images\4.png" />
-    <Content Include="images\5.png" />
-    <Content Include="images\arrow-left.png" />
-    <Content Include="images\arrow-right.png" />
-    <Content Include="images\bg.jpg" />
     <Content Include="images\cloud.png" />
     <Content Include="images\logo.png" />
-    <Content Include="images\pic1.png" />
-    <Content Include="images\pic2.png" />
-    <Content Include="images\pic3.jpg" />
-    <Content Include="images\pic4.jpg" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -348,7 +336,9 @@
     <Content Include="Scripts\jquery.gvChart-1.0.1.min.js" />
     <Content Include="Scripts\jquery.idTabs.min.js" />
     <Content Include="Scripts\jquery.js" />
-    <Content Include="WebHtml\NewsTemple.html" />
+    <Content Include="Scripts\jsRender.js" />
+    <Content Include="Temple\NewsTemple.html" />
+    <None Include="Properties\PublishProfiles\publish.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -391,12 +381,14 @@
     <Content Include="Views\Manager\MessageList.cshtml" />
     <Content Include="Views\Manager\MessageAdd.cshtml" />
     <Content Include="Views\Account\RightsAdd.cshtml" />
+    <Content Include="Views\News\IndexToHtml.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Upload\EditorNewsImg\" />
     <Folder Include="Upload\News\" />
+    <Folder Include="WebHtml\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

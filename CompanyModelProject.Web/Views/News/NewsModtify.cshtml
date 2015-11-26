@@ -77,7 +77,10 @@
                         <label>首页推荐<b>*</b></label>@Html.RadioButtonFor(Model => Model.IsIndexRecommond, false, new { id = "indexshowradio0" }) 否  @Html.RadioButtonFor(Model => Model.IsIndexRecommond, true, new { id = "indexshowradio1" }) 是
                         *@Html.ValidationMessageFor(Model => Model.IsIndexRecommond)
                     </li>
-                  
+                    <li>
+                        <label>浏览次数</label>@Html.TextBoxFor(Model => Model.Clicks, new { @readonly=true })
+                     
+                    </li>
                     <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="提交保存" /></li>
                 </ul>
             }

@@ -54,7 +54,7 @@ namespace CompanyModelProject.Services
             return access.getlist();
         }
 
-        public List<NewsModel> getlistbycolId(int colID)
+        public List<NewsWebModel> getlistbycolId(int colID)
         {
             return access.getlistbycolId(colID);
         }
@@ -64,9 +64,9 @@ namespace CompanyModelProject.Services
         /// <param name="count"></param>
         /// <param name="columnid"></param>
         /// <returns></returns>
-        public List<NewsWebModel> getTopList(int count, int columnid)
+        public List<NewsWebModel> getTopList(int count, int columnid, string where)
         {
-            return access.getTopList(count, columnid);
+            return access.getTopList(count, columnid,where);
        }
         public  int update_delete(NewsModel model)
         {

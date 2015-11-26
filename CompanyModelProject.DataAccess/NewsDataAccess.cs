@@ -30,6 +30,7 @@ namespace CompanyModelProject.DataAccess
       ,[IsClomnrecommond]
       ,[IsIndexRecommond]
       ,[IsDel] 
+      ,[Clicks]
       FROM [HtmlManagement ].[dbo].[News]
      with(nolock) where ID=@Id and isDel=0";
         /// <summary>
@@ -50,6 +51,7 @@ namespace CompanyModelProject.DataAccess
       ,[IsClomnrecommond]
       ,[IsIndexRecommond]
       ,[IsDel]
+      ,[Clicks]
        FROM [HtmlManagement].[dbo].[News] with(nolock) where isDel=0  order by orders desc ";
         /// <summary>
         /// 根据栏目查询内容信息
@@ -57,24 +59,22 @@ namespace CompanyModelProject.DataAccess
         public const string SQL_SELECT_Col = @"SELECT  [ID]
       ,[ColumnId]
       ,[Title]
-      ,[picUrl]
-      ,[Main]
-      ,[BriefMain]
-      ,[MainWithout]
+      ,[picUrl] 
+      ,[BriefMain] 
       ,[fromUrl]
       ,[HtmlUrl]
       ,[orders]
-      ,[Creater]
+      ,[Clicks]
       ,[CreateTime]
       ,[IsClomnrecommond]
       ,[IsIndexRecommond]
-      ,[IsDel]
+      ,[IsDel] 
        FROM [HtmlManagement].[dbo].[News] with(nolock) where ColumnId=@ColumnId and isDel=0";
 
         /// <summary>
         /// 查询某个栏目前几条数据
         /// </summary>
-        public const string SQL_SELECT_TOP = @"SELECT TOP @COUNT [ID]
+        public const string SQL_SELECT_TOP = @" SELECT TOP (@count)  [ID]
       ,[ColumnId]
       ,[Title]
       ,[picUrl] 
@@ -85,7 +85,9 @@ namespace CompanyModelProject.DataAccess
       ,[IsClomnrecommond]
       ,[IsIndexRecommond]
       ,[IsDel]
-       FROM [HtmlManagement].[dbo].[News] with(nolock) where ColumnId=@ColumnId and isDel=0";
+      ,[Clicks]
+       FROM [News] with(nolock) where ColumnId=@ColumnId and isDel=0";
+
         public const string SQL_UPDATE = @"UPDATE [dbo].[News] 
        SET [ColumnId] = @ColumnId 
       ,[Title] = @Title 
@@ -96,8 +98,7 @@ namespace CompanyModelProject.DataAccess
       ,[fromUrl] = @fromUrl 
       ,[HtmlUrl] = @HtmlUrl 
       ,[orders] = @orders
-      ,[Creater] = @Creater 
-      
+      ,[Creater] = @Creater  
       ,[IsClomnrecommond] = @IsClomnrecommond 
       ,[IsIndexRecommond] = @IsIndexRecommond 
       ,[IsDel] = @IsDel 
@@ -310,9 +311,9 @@ namespace CompanyModelProject.DataAccess
             return list;
         }
 
-        public List<NewsModel> getlistbycolId(int colID)
+        public List<NewsWebModel> getlistbycolId(int colID)
         {
-            List<NewsModel> list = new List<NewsModel>();
+            List<NewsWebModel> list = new List<NewsWebModel>();
             SqlParameter[] paras = { 
                                        new SqlParameter("@ColumnId",SqlDbType.NVarChar) 
                                    };
@@ -322,7 +323,7 @@ namespace CompanyModelProject.DataAccess
             {
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
-                    list.Add(RowToModel(dr));
+                    list.Add(newsWebRowToModel(dr));
                 }
             }
             else
@@ -338,16 +339,21 @@ namespace CompanyModelProject.DataAccess
       /// <param name="count"></param>
       /// <param name="columnid"></param>
       /// <returns></returns>
-        public List<NewsWebModel> getTopList(int count,int columnid)
+        public List<NewsWebModel> getTopList(int count,int columnid,string where)
         {
+            StringBuilder sb = new StringBuilder(SQL_SELECT_TOP);
+            if (where!="")
+            {
+                sb.Append(where);
+            }
             List<NewsWebModel> list = new List<NewsWebModel>();
             SqlParameter[] paras = { 
-                                       new SqlParameter("@ColumnId",SqlDbType.NVarChar), 
-                                       new SqlParameter("@COUNT",SqlDbType.NVarChar) 
+                                       new SqlParameter("@ColumnId",SqlDbType.Int), 
+                                       new SqlParameter("@count",SqlDbType.Int) 
                                    };
             paras[0].Value = columnid;
-            paras[1].Value = count; 
-            DataSet ds = DbHelper.GetInstance(ConnectionStringUtility.ConnectionString).ExecuteDataset(CommandType.Text, SQL_SELECT_TOP, paras);
+            paras[1].Value = count;
+            DataSet ds = DbHelper.GetInstance(ConnectionStringUtility.ConnectionString).ExecuteDataset(CommandType.Text, sb.ToString(), paras);
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow dr in ds.Tables[0].Rows)
@@ -428,7 +434,7 @@ namespace CompanyModelProject.DataAccess
             string strProc = "[PKG_PageData]";//存储过程名
             string sTable = " [dbo].[News]";
             string sPkey = " ID";
-            string sField = "ID,[ColumnId] ,[Title],[orders] ,HtmlUrl,[Creater] ,[CreateTime] ,[IsClomnrecommond] ,[IsIndexRecommond] ,[IsDel]";//
+            string sField = "ID,[ColumnId],[picUrl] ,[Title],[orders] ,HtmlUrl,[Creater] ,[CreateTime] ,[IsClomnrecommond] ,[IsIndexRecommond] ,[IsDel],Clicks";//
             StringBuilder sb = new StringBuilder();
             sb.Append(" isDel=0");
             if (strwhere != null && strwhere != "")
@@ -505,12 +511,14 @@ namespace CompanyModelProject.DataAccess
             item.Title = row.IsNull("Title") ? string.Empty : row.Field<string>("Title");
             item.ColumnId = row.IsNull("ColumnId") ? 0 : row.Field<int>("ColumnId"); 
             item.HtmlUrl = row.IsNull("HtmlUrl") ? string.Empty : row.Field<string>("HtmlUrl");
+            item.picUrl = row.IsNull("picUrl") ? string.Empty : row.Field<string>("picUrl");
             item.BriefMain = row.IsNull("BriefMain") ? string.Empty : row.Field<string>("BriefMain"); 
             item.CreateTime = row.IsNull("CreateTime") ? DateTime.Now : row.Field<DateTime>("CreateTime");
             item.orders = row.IsNull("orders") ? 0 : row.Field<int>("orders");
             item.IsClomnrecommond = row.IsNull("IsClomnrecommond") ? false : true;
             item.IsIndexRecommond = row.IsNull("IsIndexRecommond") ? false : true;
             item.isDel = row.IsNull("isDel") ? false : true;
+            item.Clicks = row.IsNull("Clicks") ? 0 : row.Field<int>("Clicks");
             return item;
         }
 

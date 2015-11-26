@@ -32,5 +32,6 @@ namespace CompanyModelProject.Model
         public bool IsClomnrecommond { get; set; }
         public bool IsIndexRecommond { get; set; }
 
+        public int Clicks { get; set; }
     }
 }
