@@ -1,0 +1,105 @@
+#public_content{width:1000px;border: 0px solid red;margin: 0 auto;margin-top: 20px;}
+.public_left{width:314px;border: 0px solid red;float:left;border: 0px solid red;}
+.public_right{width:675px;border: 0px solid blue;float: right;margin-top:15px;}
+.public_top{width:1000px;height:82px;border: 0px solid red;}
+.public_guanfang{width:314px;height:102px;border: 0px solid red;margin-top:15px;}
+.public_img{width: 314px;height:82px;border: 0px solid red;}
+
+.new_there1{width: 313px;height:325px;border: 0px solid red;margin-top:0px;}
+.new_there_top1{width: 313px;height: 36px;border-bottom:0px solid #AAAAAA;}
+.new_there_top_title1{width: 74px;height: 28px;background: #8D0303;float: left;color:#fff;text-align:center;font-weight: bold;line-height:25px;}
+.new_there_top_more1{width: 54px;height:18px;background: #8B8B8B;float: right;margin-top:8px;text-align: center;line-height:15px;}
+.new_there_top_more1 a{color: #fff;}
+.taer1{border: 1px solid #AAAAAA;margin: 0 auto;clear: both;width: 314px;height:290px;}
+.taer_img2{float: left;width: 82px;margin-left:16px;margin-top:10px;display: block;}
+.taer_img2 div{text-align: center;color: #323232;}
+
+.words_there1{width: 314px;border: 0px solid red;clear:both;margin-top:10px;height:615px}
+.words_there_top1{width:314px;height:32px;border-bottom: 0px solid #AAAAAA;}
+.words_there_title1{width: 73px;height:27px;background: #8F0100;margin-top: 2px;float: left ;text-align: center;color: #fff;line-height:27px;font-weight: bold;}
+.words_there1 ul{margin-top: 5px;width: 290px;border: 0px solid red;margin-right:10px;margin-bottom:8px;float: right;}
+.words_there1 ul li{margin-top: 7px;}
+.words_there1 ul li .fll{color: #828282;}
+.biank{border: 1px solid #AAAAAA;margin-top:10px ;}
+.biank1{border: 1px solid #AAAAAA;margin-top:10px ;height:220px}
+
+
+.public_ke_list{width: 1000px;height:122px;border-top: 1px solid #8F0002;border-bottom: 1px solid #8F0002;clear: both;margin-top:25px;}
+.public_ke_title{width: 76px ; height:122px;background: #8F0002;float: left;}
+.public_ke_title1{width: 76px;height:44px;text-align: center;line-height: 44px;font-size: 15px;color: #fff;border-bottom:1px dashed #fff ;}
+
+.public_ke_title2{width: 76px;height:79px;text-align: center;line-height: 79px;font-size:15px;color: #fff;}
+.public_ke_content{width: 920px;height: 122px;border: 0px solid blue;float: left;}
+.public_ke_content1{width:870px;height: 44px;border-bottom:1px dashed #AAAAAA ;margin: 0 auto;}
+.public_ke_content1  ul li {float: left;width: 73px;height:27;border: 1px solid #8F0002;line-height:27px;margin-left:24px;margin-top: 8px;text-align: center;}
+.public_ke_content1  ul li a{width: 70px;height: 23px;color: #000000;}
+.public_ke_content1  ul li a:hover{color:#fff ;background: #8F0002;}
+.public_ke_content2{width:870px;height: 78px;margin: 0 auto;}
+.public_ke_content2  ul li {float: left;width: 73px;height:27;border: 1px solid #8F0002;line-height:27px;margin-left:24px;margin-top: 6px;text-align: center;}
+.public_ke_content2  ul li a{color: #000000;}
+.public_ke_content2  ul li a:hover{color:#fff ;background: #8F0002;}
+
+.imgnew_one1{width: 1000px ; height: 233px;background: #F1F1F1;margin: 0 auto;}
+
+
+/*鍙宠竟*/
+.public_right_top{width: 675px;height:41px;background: #8F0002;line-height:41px;color:#fff;font-family: 瀹嬩綋;}
+.public_right_content{width: 675px;margin-top:5px;border: 0px solid red;}
+
+
+/*甯堣祫鍒楄〃鏍峰紡寮€濮�*/
+.taer_list{width: 308px;height: 198px;border: 0px solid red;float: left;margin-left:20px;margin-top:20px}
+.button{width:670px;height: 30px;border: 0px solid red;clear: both;position: absolute;}
+.page_box{margin-left:45%;}
+.num{padding:0 10px;}
+.jies{width:150px ;height:198px;border: 0px solid red;float: left;margin-left:10px;}
+.jies_title{widows:150px;height: 36px;border-bottom: 1px dashed #ccc;text-align: center;line-height:36px;font-size: 15px;}
+.jies_title a{color: #010101;font-size:15px;}
+.jies_content{width: 150px;height: 146px;border: 0px solid red;margin-top:10px;}
+
+/*鏂伴椈鍔ㄦ€�*/
+.new_title{width:650px;height:40px;border-bottom: 1px dashed #ccc;margin-top:17px;line-height:40px;margin-left:10px;}
+.new_title a{color:#454545;}
+.new_title a span{float:left;}
+.new_title a:hover{color: #8D0100}
+.new_title span{float:left;}
+.button1{width:670px;height: 30px;border: 0px solid red;clear: both;margin-top:60px;position: absolute;}
+.page_box a:hover{color: #1394D8;}
+.page_box a{cursor: pointer;color: #656565;}
+.new_list{height: auto;}
+
+/*璇︽儏椤甸潰*/
+.public_right_content_title{width:670px;border: 0px solid red;font-size:18px;color: #000000;text-align: center;margin-top:20px;}
+.sodi{width: 670px;height: 30px;color: #ccc;text-align: center;border-bottom: 1px dashed #ccc;margin-bottom:20px;}
+
+/*甯堣祫璇︽儏*/
+.tear_title{width: 633px;height: 232px;border: 0px solid red;margin: 0 auto;margin-top:20px;margin-bottom: 30px;}
+.taer_title_img{width: 191px;height:232px;border: 0px solid red;float: left;}
+.tear_content{width:426px;height:99px;border-bottom: 2px solid #1296D7;float: right;}
+.taer_name{width:100px;height:70px;border: 0px solid red;text-align: center;line-height:90px;font-size:18px;
+font-weight: bold;margin-top:20px;}
+.tear_xueli{border: 0px solid red;color: #676769 ;}
+.tear_xueli {height:230px;width:426px;margin-left:15px}
+.tear_content_one{float: right;border: 0px solid #0000FF;height: 232px;}
+.jianl{width: 426px;font-size:15px;color: #676769;line-height:35px;}
+
+/*璇剧▼鍒楄〃*/
+.public_kec_list{width: 670px;height:160px;border: 1px solid #CCCCCC;margin-top:9px;}
+.public_kec_list_title{width: 650px;height: 32px;border: 0px solid red;margin:0 auto;line-height:25px;margin-top: 5px;}
+.public_kec_list_title div{margin-left:25px;color: #8F0002;font-weight: bold;}
+.table1 a{color: #363636}
+.table1 a:hover{color: #900000;}
+.table1{border: 1px solid #ccc;}
+
+
+
+.article_content {line-height:1.5em;}
+.article_content img{margin-bottom:20px}
+
+.fll1{float: left;margin-top:15px}
+.fll{float: left;margin-left:30px;margin-top:5px}
+.aaaa{width:670px;border-bottom:1px solid black;height: 170px}
+/*鍏叡娓呴櫎娴姩*/
+.clearfloat{clear: both;}
+
+.article_content{line-height:20px}

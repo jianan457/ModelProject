@@ -19,77 +19,78 @@
         <li><a href="#">表单管理</a></li>
     </ul>
 </div>
-
-<div class="tools">
-    <ul class="toolbar">
-        <li><span onclick="addMess()"><img src="/images/t01.png" /></span>添加表单</li>
-        <li class="click"><span><img src="/images/t03.png" /></span>删除</li>
-    </ul>
-</div>
-<table class="tablelist">
-    <thead>
-        <tr>
-            <th>
-                <input name="chk_list" type="checkbox" value="" id="checkboxall" />
-                编号
-            </th>
-            <th>表单内容</th>
-            <th>作者人</th>   
-            <th>邮箱 / QQ</th>
-            <th>时间</th>
-            <th>操作</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (ViewBag.data != null)
-        {
-            int i = 1;
-            foreach (var item in ViewBag.data)
+<div class="rightinfo">
+    <div class="tools">
+        <ul class="toolbar">
+            <li><span onclick="addMess()"><img src="/images/t01.png" /></span>添加表单</li>
+            <li class="click"><span><img src="/images/t03.png" /></span>删除</li>
+        </ul>
+    </div>
+    <table class="tablelist">
+        <thead>
+            <tr>
+                <th>
+                    <input name="chk_list" type="checkbox" value="" id="checkboxall" />
+                    编号
+                </th>
+                <th>表单内容</th>
+                <th>作者人</th>
+                <th>邮箱 / QQ</th>
+                <th>时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (ViewBag.data != null)
+            {
+                int i = 1;
+                foreach (var item in ViewBag.data)
+                {
+                    <tr>
+                        <td><input name="chk_list" type="checkbox" value="@item.ID" id="checkbox_@item.ID" />  @(i++)</td>
+                        <td>@(item.main.ToString().Length > 50 ? item.main.Substring(0, 50) + "……" : item.main)</td>
+                        <td>@item.username</td>
+                        <td>@(item.Email == "" ? "无" : item.Email)/@(item.QQ == "" ? "无" : item.QQ)</td>
+                        <td>@item.addtime</td>
+                        <td> <a href="#" class="tablelink" onclick="delMessage(@item.ID)"> 删除</a> </td>
+                    </tr>
+                }
+            }
+            else
             {
                 <tr>
-                    <td><input name="chk_list" type="checkbox" value="@item.ID" id="checkbox_@item.ID" />  @(i++)</td>
-                    <td>@(item.main.ToString().Length > 50 ? item.main.Substring(0, 50) + "……" : item.main)</td>
-                    <td>@item.username</td> 
-                    <td>@(item.Email==""?"无":item.Email)/@(item.QQ==""?"无":item.QQ)</td>
-                    <td>@item.addtime</td> 
-                    <td> <a href="#" class="tablelink" onclick="delMessage(@item.ID)"> 删除</a> </td>
+                    <td colspan="5">@ViewBag.meg</td>
                 </tr>
             }
-        }
-        else
-        {
-            <tr>
-                <td colspan="5">@ViewBag.meg</td>
-            </tr>
-        }
-    </tbody>
-</table>
-<div class="tip">
-    <div class="tiptop"><span>提示信息</span><a></a></div>
-    <div class="tipinfo">
-        <span><img src="/images/ticon.png" /></span>
-        <div class="tipright">
-            <p>是否确认删除信息 ？</p>
-            <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+        </tbody>
+    </table>
+    <div class="tip">
+        <div class="tiptop"><span>提示信息</span><a></a></div>
+        <div class="tipinfo">
+            <span><img src="/images/ticon.png" /></span>
+            <div class="tipright">
+                <p>是否确认删除信息 ？</p>
+                <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+            </div>
         </div>
-    </div>
 
-    <div class="tipbtn">
-        <input name="" type="button" class="sure" value="确定" />&nbsp;
-        <input name="" type="button" class="cancel" value="取消" />
-    </div>
+        <div class="tipbtn">
+            <input name="" type="button" class="sure" value="确定" />&nbsp;
+            <input name="" type="button" class="cancel" value="取消" />
+        </div>
 
+    </div>
+    @if (ViewBag.Url != null)
+    {
+        @Helpers.RenderPageControl(ViewBag.Url, ViewBag.PageIndex - 1)
+    }
+    <script>
+        $(function () {
+            selectall('message'); ///全选
+            var id = '@ViewBag.liId';
+            $(".menuson").hide();
+            $("#" + id).addClass("active");
+            $("#" + id).parent().show();
+        })
+    </script>
 </div>
-@if (ViewBag.Url != null)
-{
-    @Helpers.RenderPageControl(ViewBag.Url, ViewBag.PageIndex - 1)
-}
-<script>
-    $(function () { 
-        selectall('message'); ///全选 
-        var id = '@ViewBag.liId';
-        $(".menuson").hide();
-        $("#" + id).addClass("active");
-        $("#" + id).parent().show();
-    })
-</script>

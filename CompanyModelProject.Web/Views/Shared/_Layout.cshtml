@@ -3,43 +3,145 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
+    <meta name="keywords" content="@ViewBag.keys" />
+    <meta name="description" content="@ViewBag.dec" />  
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>@ViewBag.Title-@ViewBag.secTitle</title>
+    <link rel="shortcut icon" href="/images/logo.ico">
+    <link rel="stylesheet" href="/Content/style2.css">
+    <link rel="stylesheet" href="/Content/public_style.css"> 
+    <script type="text/javascript" src="/Scripts/jquery-1.7.2.min.js"></script>
+    <script src="/Scripts/jquery.lazyload.min.js"></script>
+    <script src="/Scripts/jquery.kxbdMarquee.js"></script>
+    <script src="~/Scripts/web.js"></script>
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("应用程序名称", "Index", "Home", null, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("主页", "Index", "Home")</li>
-                    <li>@Html.ActionLink("关于", "About", "Home")</li>
-                    <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
+<body>      
+    <div id="head">@Html.Partial("_webTopPartal")</div>
+    <div id="index"> 
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
-        </footer>
-    </div>
+    </div> 
+    <div id="foot">@Html.Partial("_webFootPartal")</div>//底部
+    <script type="text/javascript" src="/Scripts/jquery.lazyload.min.js"></script> 
+    <script>
+        $("img.lazy").lazyload({ threshold: 50 });
+        var topCatId = "";
+        $('#top_' + topCatId).css('color', 'yellow');
+    </script>
+    <script type="text/javascript">
+        $(function () {
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
+            // 图片上下翻滚
+            var len = $('.slidebtn>ul>li').length;
+            var index = 0;
+            var autoplay;
+            $('.slidebtn li').mouseover(function () {
+                index = $('.slidebtn li').index(this);
+                showImg(index);
+            }).eq(0).mouseover();
+
+            $('.slidebox').hover(function () {
+                clearInterval(autoplay);
+            }, function () {
+                autoplay = setInterval(function () {
+                    showImg(index)
+                    index++;
+                    if (index == len) {
+                        index = 0;
+                    }
+                }, 3000);
+            }).trigger('mouseleave');
+
+            function showImg(index) {
+                var picheight = $('.slidebox').height();
+                $('.slidepic').stop(true, false).animate({ top: -picheight * index }, 600)
+                $('.slidebtn li').removeClass('current').eq(index).addClass('current');
+            };
+
+
+            // 图片左右翻滚
+            var size = $('.slidebtn-01>ul>li').length;
+            var frist = 0;
+            var datetime;
+            $('.slidebtn-01 li').mouseover(function () {
+                frist = $('.slidebtn-01 li').index(this);
+                showpic(frist);
+            }).eq(0).mouseover();
+
+            $('.slidebox-01').hover(function () {
+                clearInterval(datetime);
+            }, function () {
+                datetime = setInterval(function () {
+                    showpic(frist)
+                    frist++;
+                    if (frist == size) {
+                        frist = 0;
+                    }
+                }, 3000);
+            }).trigger('mouseleave');
+
+            function showpic(frist) {
+                var imgheight = $('.slidebox-01').width();
+                $('.slidepic-01').stop(true, false).animate({ left: -imgheight * frist }, 600)
+                $('.slidebtn-01 li').removeClass('current').eq(frist).addClass('current');
+            };
+
+        });
+
+        //图片淡隐淡现
+        var defaultOpts = { interval: 5000, fadeInTime: 300, fadeOutTime: 200 };
+
+        var _titles = $("ul.slide-txt li");
+        var _titles_bg = $("ul.op li");
+        var _bodies = $("ul.slide-pic li");
+        var _count = _titles.length;
+        var _current = 0;
+        var _intervalID = null;
+
+        var stop = function () {
+            window.clearInterval(_intervalID);
+        };
+
+        var slide = function (opts) {
+            if (opts) {
+                _current = opts.current || 0;
+            } else {
+                _current = (_current >= (_count - 1)) ? 0 : (++_current);
+            };
+            _bodies.filter(":visible").fadeOut(defaultOpts.fadeOutTime, function () {
+                _bodies.eq(_current).fadeIn(defaultOpts.fadeInTime);
+                _bodies.removeClass("current").eq(_current).addClass("current");
+            });
+            _titles.removeClass("current").eq(_current).addClass("current");
+            _titles_bg.removeClass("current").eq(_current).addClass("current");
+        };
+
+        var go = function () {
+            stop();
+            _intervalID = window.setInterval(function () {
+                slide();
+            }, defaultOpts.interval);
+        };
+
+        var itemMouseOver = function (target, items) {
+            stop();
+            var i = $.inArray(target, items);
+            slide({ current: i });
+        };
+
+        _titles.hover(function () {
+            if ($(this).attr('class') != 'current') {
+                itemMouseOver(this, _titles);
+            } else {
+                stop();
+            }
+        }, go);
+
+        _bodies.hover(stop, go);
+
+        go();
+
+    </script>
+ </body>
 </html>

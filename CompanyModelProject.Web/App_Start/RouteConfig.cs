@@ -16,9 +16,9 @@ namespace CompanyModelProject.Web
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                //defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                defaults: new { action = "Index", id = UrlParameter.Optional },
-                  namespaces: new string[] { "CompanyModelProject.Controllers" }
+                //defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },//读取/Home/Index为默认首页
+                defaults: new { action = "Index", id = UrlParameter.Optional },//读取Index.html为默认首页
+                namespaces: new string[] { "CompanyModelProject.Controllers" }
             );
         }
     }

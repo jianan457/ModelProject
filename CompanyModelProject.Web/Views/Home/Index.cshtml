@@ -1,1 +1,312 @@
-﻿
+﻿@{
+    ViewBag.secTitle = "首页";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+<div style="height:20px;"></div>
+<div id="content">
+    <div class="content_one">
+        <div class="slidebox-01">
+            <ul class="slidepic-01">
+                <li><a href="#"><img width="1000px" height="340px" alt="郑州大学工商管理研修班" src="/images/20141117021743401.jpg" /></a></li>
+                <li><a href="#"><img width="1000px" height="340px" alt="郑州大学经营方略研修班" src="/images/20141117021825836.jpg" /></a></li>
+                <li><a href="#"><img width="1000px" height="340px" alt="郑州大学互联网金融实战研修班" src="/images/20141117021851392.jpg" /></a></li>
+                <li><a href="#"><img width="1000px" height="340px" alt="郑州大学实战型私募股权投资（PE）与资本运营研修班" src="/images/20141117021907134.jpg" /></a></li>
+            </ul>
+            <div class="slidebtn-01">
+                <ul>
+                    <li class="current"></li>
+                    <li class="current"></li>
+                    <li class="current"></li>
+                    <li class="current"></li>
+
+                </ul>
+            </div>
+        </div>
+        <!--slidebox-01 end-->
+    </div>
+</div>
+<div style="height:20px;clear: both;"></div>
+<div id="words">
+    <div class="words_one">
+        <div class="words_tow">
+            <div class="words_top">
+                <div class="words_top_title">
+                    郑州大学总裁班项目简介
+                </div>
+                <div class="new_there_top_more">
+                    <a href="/Home/Summary ">more</a>
+                </div>
+
+            </div>
+            <dl class="dlhover">
+                <dt><img src="@ViewBag.dectionimg" style=" width:200px; height:206px;" /></dt>
+                <dd>
+                    <p>
+                        @if (ViewBag.dection != null)
+                        {
+                            @(ViewBag.dection.Length > 268 ? ViewBag.dection.Substring(0, 268) + "…" : ViewBag.dection)
+                        }
+                        else
+                        {
+                            @ViewBag.dectionmsg
+                        }
+                        <span><a href="/Home/Summary" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;详细内容>></a></span>
+                    </p>
+                </dd>
+            </dl>
+        </div>
+        <div class="words_there">
+            <div class="words_there_top">
+                <div class="words_there_title">
+                    教务公告
+                </div>
+                <div class="words_more">
+                    <a href="/Home/StudyList ">more</a>
+                </div>
+            </div>
+            <div style="border:1px solid #ccc;height:230px;padding-top:6px;">
+                @if (ViewBag.study != null)
+                {
+                    foreach (var item in ViewBag.study)
+                    {
+                        <div class="fll2" style="height:28px;line-height:25px;"><a href="@item.HtmlUrl" alt="@item.Title" target="_blank"> •  @(item.Title.Length > 22 ? item.Title.Substring(0, 22) + "…" : item.Title)</a></div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="height:20px;clear: both;"></div>
+<!--新闻动态开始-->
+<div id="new">
+    <div class="new_one">
+        <div class="new_tow">
+            <div class="new_tow_top">
+                <div class="new_wodrs_title">
+                    新闻动态
+                </div>
+            </div>
+            <div class="new_wodrs">
+                <ul>
+                    @if (ViewBag.news != null)
+                    {
+                        foreach (var item in ViewBag.news)
+                        {
+                            if (item.IsIndexRecommond)
+                            {
+                                <li class="id1">
+                                    <img class="lazy" data-original="@item.picUrl" alt="@item.Title" />
+                                    <div class="new_wodrs_list">
+                                        <div class="new_wodrs_list_title">
+                                            <b>@item.Title</b>
+                                        </div>
+                                        <div class="new_num">
+                                            &nbsp;&nbsp; @(item.BriefMain.Length > 60 ? item.BriefMain.Substring(0, 60) + "…" : item.BriefMain)
+                                        </div>
+                                        <div class="flass">
+                                            <a href="@item.HtmlUrl" target="_blank">详细内容>></a>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="id2" style="width:100%;">
+                                    <div class="new_wodrs_list_time">
+                                        @item.CreateTime.ToString("yyyy-MM-dd")
+                                    </div>
+                                    <div class="new_num_title">
+                                        <a href="@item.HtmlUrl" target="_blank"> @(item.Title.Length > 36 ? item.Title.Substring(0, 36) + "…" : item.Title)</a>
+                                    </div>
+                                </li>
+                            }
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="new_there">
+            <div class="new_there_top">
+                <div class="new_there_top_title">
+                    名师介绍
+                </div>
+                <div class="new_there_top_more">
+                    <a href="/Home/TeacherList">more</a>
+                </div>
+            </div>
+            <div class="taer">
+                @if (ViewBag.teacher != null)
+                {
+                    foreach (var item in ViewBag.teacher)
+                    {
+                        <div class="taer_img1">
+                            <a href="@item.HtmlUrl" target="_blank"><img class="lazy" data-original="@item.picUrl" alt="@item.Title" width="82px" height="109px" /></a>
+                            <div>
+                                @item.Title
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!--新闻动态结束-->
+<div style="clear: both;height:20px"></div>
+<!--学员风采开始-->
+<div id="student">
+    <div class="student_one">
+        <div class="student_list1">
+            <div class="new_there_top">
+                <div class="new_there_top_title">
+                    学员风采
+                </div>
+                
+            </div>
+            @if (ViewBag.student != null)
+            {
+                foreach (var item in ViewBag.student)
+                {
+                    <div class="student_list3" style="height:20px">
+                        <a href="@item.HtmlUrl" target="_blank">@(item.Title.Length > 20 ? item.Title.Substring(0, 20) + "…" : item.Title)</a>
+                    </div>
+
+                }
+            }
+        </div>
+        <div class="student_list2">
+            <div class="new_there_top">
+                <div class="new_there_top_title">
+                    学员企业
+                </div>
+                
+            </div>
+            @if (ViewBag.stucom != null)
+            {
+                foreach (var item in ViewBag.stucom)
+                {
+                    <div class="student_list_xue" style="height:20px"><a href="@item.HtmlUrl" target="_blank">@(item.Title.Length > 20 ? item.Title.Substring(0, 20) + "…" : item.Title)</a></div>
+                }
+            }
+        </div>
+        <div class="student_list2">
+            <div class="new_there_top">
+                <div class="new_there_top_title">
+                    管理资讯
+                </div>
+                
+            </div>
+            @if (ViewBag.managenews != null)
+            {
+                foreach (var item in ViewBag.managenews)
+                {
+                    <div class="student_list3" style="height:20px;width:320px;"><div style="width:210px"><a href="@item.HtmlUrl" target="_blank">@(item.Title.Length > 16 ? item.Title.Substring(0, 16) + "…" : item.Title)</a></div><div class="stu_one">@item.CreateTime.ToString("MM-dd")</div></div>
+
+                }
+            }
+        </div>
+    </div>
+</div>
+<style>
+    .student_list3 div {
+        float: left;
+    }
+
+    .stu_one {
+        margin-left: 60px;
+    }
+</style>
+<!--学员风采结束-->
+<div style="clear: both;height:20px"></div>
+<!--课程分类开始-->
+<div id="culum">
+    <div class="culum_one">
+        <div class="culum_tow">
+            <div class="culum_tow_tp">
+                招生对象
+            </div>
+        </div>
+        <div class="culum_there">
+            <div class="culum_there_list">
+                <ul>
+                    <li style="margin-left:3px;"><a href="#">投资者</a></li>
+                    <li class="fla"><a href="#">执行董事</a></li>
+                    <li class="fla"><a href="#">控股股东</a></li>
+                    <li class="fla"><a href="#">高级经理</a></li>
+                    <li class="fla"><a href="#">单位领导</a></li>
+                    <li class="fla"><a href="#">负责人</a></li>
+                    <li class="fla"><a href="#">政府干部</a></li>
+                    <li class="fla">
+                        <a href="#">
+                            储备干部
+                        </a>
+                    </li>
+                    <li class="fla"><a href="#">业务骨干</a></li>
+                </ul>
+            </div>
+            <div class="culum_there_ction">
+                <ul>
+                    <li style="margin-left:3px;"><a href="#">董事长</a></li>
+                    <li class="fla"><a href="#">总 裁</a></li>
+                    <li class="fla"><a href="#">总经理</a></li>
+                    <li class="fla"><a href="#">中层管理者</a></li>
+                    <li class="fla"><a href="#">职业经理人</a></li>
+                    <li class="fla"><a href="#">金融行业</a></li>
+                    <li class="fla"><a href="#">企业合伙人</a></li>
+                    <li class="fla"><a href="#">公司股东</a></li>
+                    <li class="fla"><a href="#">董&nbsp;事</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--课程分类结束-->
+<div style="clear: both;height:20px"></div>
+<!--图片新闻开始-->
+<div id="imgnew">
+    <div class="imgnew_one">
+        <div class="imgnew_one_top">
+            <div class="imgnew_one_top_one">
+                图片新闻
+            </div>
+        </div>
+        <div id="marquee1">
+            <ul>
+                @if (ViewBag.newPic != null)
+                {
+                    foreach (var item in ViewBag.newPic)
+                    {
+                        <li><img class="lazy" data-original="@item.picUrl" width="280" height="160"></li>
+                    }
+                } 
+            </ul>
+        </div>
+    </div>
+    <style>
+        #marquee1 {
+            width: 1000px;
+            height: 160px;
+            overflow: hidden;
+            background: #ccc;
+            margin-top: 20px;
+        }
+
+            #marquee1 ul li {
+                float: left;
+                padding: 0 1px;
+            }
+
+                #marquee1 ul li img {
+                    display: block;
+                }
+    </style>
+    <script>
+        (function () {
+            $("#marquee1").kxbdMarquee({ direction: "left" });
+        })();
+    </script>
+</div>
+<!--图片新闻结束-->
+

@@ -121,8 +121,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\public_style.css" />
     <Content Include="Content\select.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\style2.css" />
+    <Content Include="Content\talk99.css" />
     <Content Include="editor\kindeditor-min.js" />
     <Content Include="editor\lang\zh_CN.js" />
     <Content Include="editor\plugins\anchor\anchor.js" />
@@ -316,7 +319,22 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\20141110022639757.jpg" />
+    <Content Include="images\20141110110451433.jpg" />
+    <Content Include="images\20141117021743401.jpg" />
+    <Content Include="images\20141117021825836.jpg" />
+    <Content Include="images\20141117021851392.jpg" />
+    <Content Include="images\20141117021907134.jpg" />
+    <Content Include="images\class_icon.png" />
+    <Content Include="images\class_line.png" />
+    <Content Include="images\close.gif" />
     <Content Include="images\cloud.png" />
+    <Content Include="images\con-xybg2.jpg" />
+    <Content Include="images\hm.gif" />
+    <Content Include="images\hot.jpg" />
+    <Content Include="images\icon_new.jpg" />
+    <Content Include="images\log.gif" />
+    <Content Include="images\logo.ico" />
     <Content Include="images\logo.png" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
@@ -327,16 +345,27 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="images\s.gif" />
+    <Content Include="images\small_banner.jpg" />
+    <Content Include="images\tijia.jpg" />
     <Content Include="images\topbg.gif" />
+    <Content Include="images\top_pic.jpg" />
+    <Content Include="Index.html" />
+    <Content Include="Scripts\10033223.js" />
     <Content Include="Scripts\Account.js" />
     <Content Include="Scripts\ajaxfileupload.js" />
     <Content Include="Scripts\cloud.js" />
     <Content Include="Scripts\format+zh_CN,default,corechart.I.js" />
+    <Content Include="Scripts\jquery-1.7.2.min.js" />
     <Content Include="Scripts\jquery.ba-resize.min.js" />
     <Content Include="Scripts\jquery.gvChart-1.0.1.min.js" />
     <Content Include="Scripts\jquery.idTabs.min.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.kxbdMarquee.js" />
+    <Content Include="Scripts\jquery.lazyload.min.js" />
     <Content Include="Scripts\jsRender.js" />
+    <Content Include="Scripts\web.js" />
+    <Content Include="Temple\Index.html" />
     <Content Include="Temple\NewsTemple.html" />
     <None Include="Properties\PublishProfiles\publish.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -349,6 +378,7 @@
     <Content Include="Scripts\PIE.htc" />
     <Content Include="Scripts\select-ui.min.js" />
     <Content Include="src\jquery.gvChart-1.0.1.js" />
+    <Content Include="Temple\TeacherTemple.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -382,6 +412,16 @@
     <Content Include="Views\Manager\MessageAdd.cshtml" />
     <Content Include="Views\Account\RightsAdd.cshtml" />
     <Content Include="Views\News\IndexToHtml.cshtml" />
+    <Content Include="Views\Shared\_webTopPartal.cshtml" />
+    <Content Include="Views\Shared\_webFootPartal.cshtml" />
+    <Content Include="Views\Home\Summary.cshtml" />
+    <Content Include="Views\Home\Enrollment.cshtml" />
+    <Content Include="Views\Home\StudyList.cshtml" />
+    <Content Include="Views\Home\TeacherList.cshtml" />
+    <Content Include="Views\Home\Training.cshtml" />
+    <Content Include="Views\Home\ProblemList.cshtml" />
+    <Content Include="Views\Home\NewsList.cshtml" />
+    <Content Include="Views\Home\ContactUs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

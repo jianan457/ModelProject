@@ -1,0 +1,124 @@
+﻿@model CompanyModelProject.Model.NewsModel
+@{
+    ViewBag.secTitle = Model.Title;
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<div id="public_content">
+    <div class="public_top">
+        <img src="/images/small_banner.jpg" alt="郑大总裁高级研修项目" width="1000px" height="82px" />
+    </div>
+    <div class="public_left " style="border: 0px solid red;">
+        <div class="id_aa">
+            <div class="public_guanfang">
+                <div class="public_img">
+                    <img src="/images/hot.jpg" alt="报名电话" width="314px" height="82px" />
+                </div>
+            </div>
+            <div class="new_there1">
+                <div class="new_there_top1">
+                    <div class="new_there_top_title1">
+                        名师介绍
+                    </div>
+                    <div class="new_there_top_more1">
+                        <a href="#">more</a>
+                    </div>
+                </div>
+                <div class="taer1">
+
+                    @if (ViewBag.teacher != null)
+                    {
+                        foreach (var item in ViewBag.teacher)
+                        {
+                            <div class="taer_img2">
+                                <a href="@item.HtmlUrl"><img src="@item.picUrl" alt="@item.Title" width=" 82px" height="109px" /></a>
+                                <div>
+                                    @item.Title
+                                </div>
+                            </div>
+
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="box" style="border:0px solid red;height:615px">
+            <div class="words_there1 pinned">
+                <div class="words_there_top1">
+                    <div class="words_there_title1">教务公告</div>
+                    <div class="words_more">
+                        <a href="#">more</a>
+                    </div>
+                </div>
+                <style type="text/css">
+                    .fll1 a:hover {
+                        color: #8F0002;
+                    }
+                </style>
+                <div class="biank">
+                    <ul>
+                        @if (ViewBag.study != null)
+                        {
+                            foreach (var item in ViewBag.study)
+                            {
+                                <li>
+                                    <span class="fll1">
+                                        <a href="@item.HtmlUrl"> • @(item.Title.Length > 18 ? item.Title.Substring(0, 18) + "…" : item.Title)</a>
+                                    </span>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    <div style="clear: both"></div>
+                </div>
+                <div style="height:15px"></div>
+                <div style="height:262px;width:314px;border: 0px solid #CCCCCC">
+                    <div class="words_there_top1">
+                        <div class="words_there_title1">快速报名</div>
+                    </div>
+                    <div class="biank1">
+                        <div style="height:40px;width:290px;border:0px solid red;margin: 0 auto;margin-top:5px;color:#aaaaaa">
+                            <div style="line-height:20px;letter-spacing:-1px"><span style="color:#8f0001;">* 温馨提示:</span>郑州大学信息学院高层培训中心郑重承诺:<br />&nbsp;所填信息仅用于招生工作,绝不外泄！</div>
+                        </div>
+                        <div style="width:253px;height:170px;border:0px solid red;margin: 0 auto">
+
+                            <div style="margin-top:5px">
+                                姓 名：<input type="text" name="name" id="myname" value="---请输入您的姓名---" onfocus="if(value==defaultValue){value='';this.style.color='#000'}" onblur="if(!value){value=defaultValue;this.style.color='#999'}" style="width:200px;height:20px;text-align:center;color:#999999;background:#eeeeee;border-radius:3px;;border:0px" />
+                            </div>
+                            <div style="margin-top:5px">
+                                手 机：<input type="text" name="mobile" id="mebli" value="---请输入您的电话---" onfocus="if(value==defaultValue){value='';this.style.color='#000'}" onblur="if(!value){value=defaultValue;this.style.color='#999'}" style="width:200px;height:20px;text-align:center;color:#999999;background:#eeeeee;border-radius:3px;border:0px" />
+                            </div>
+                            <div style="margin-top:5px">
+                                留 言：<input type="text" name="main" id="main" value="请提出您的要求" onfocus="if(value==defaultValue){value='';this.style.color='#000'}" onblur="if(!value){value=defaultValue;this.style.color='#999'}" style="width:200px;height:52px;color:#999999;background:#eeeeee;border-radius:3px;border:0px" />
+                            </div>
+                            <div style="margin-top:5px;text-align:center">
+                                <input type="submit" value="" style="width:100px;height:27px;background:url(/images/tijia.jpg);border: 0px" onclick="mit()" />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+        </div>
+    </div>
+
+    <div class="public_right">
+        <div class="public_right_top">
+            &nbsp;&nbsp;&nbsp;&nbsp;您的位置：首页 >> 企业内训
+        </div> 
+        <div class="public_right_content">
+            <h1 class="public_right_content_title">@Model.Title</h1>
+            <p class="sodi"></p>
+            <article>
+                <div class="article_content" style="line-height: 25px;font-size:14px">
+                    @Html.Raw(Model.Main)
+                </div>
+            </article>
+        </div>
+    </div>
+    <div style="clear:both"></div>
+    <div style="width: 1000px;clear:both;"></div>
+    <div style="height:20px"></div>
+</div>
+<div style="clear:both"></div>
