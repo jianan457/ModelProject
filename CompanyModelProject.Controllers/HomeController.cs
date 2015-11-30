@@ -19,7 +19,7 @@ namespace CompanyModelProject.Controllers
              ViewBag.dec = Description;
             ViewBag.title = Title;
             //新闻动态（1+4）
-            List<NewsWebModel> list1 = news.getTopList(5, 18, " and IsIndexRecommond=1");
+            List<NewsWebModel> list1 = news.getTopList(5, 18, " and IsClomnrecommond=1");
             if (list1!=null&&list1.Count>0)
             {
                 ViewBag.news = list1;
@@ -47,10 +47,34 @@ namespace CompanyModelProject.Controllers
             }
             //学员风采
             List<NewsWebModel> list4 = news.getTopList(6, 36, "");
+            if (list4!=null&&list4.Count>0)
+            {
+                 ViewBag.student =list4;
+            }
+            else
+            {
+                ViewBag.studentmsg = "暂无数据";
+            }
             //学员企业
             List<NewsWebModel> list5 = news.getTopList(6, 37, "");
+            if (list5 != null && list5.Count > 0)
+            {
+                ViewBag.stucom = list5;
+            }
+            else
+            {
+                ViewBag.stucommsg = "暂无数据";
+            }
             //管理资讯
             List<NewsWebModel> list6 = news.getTopList(6, 38, "");
+            if (list6 != null && list6.Count > 0)
+            {
+                ViewBag.managenews = list6;
+            }
+            else
+            {
+                ViewBag.managenewsmsg = "暂无数据";
+            }
 
             //名师介绍(图片)
             if (getTeacher() != null && getTeacher().Count > 0)
@@ -77,6 +101,25 @@ namespace CompanyModelProject.Controllers
 
         public ActionResult NewsList()//新闻动态
         {
+
+            //名师介绍(图片)
+            if (getTeacher() != null && getTeacher().Count > 0)
+            {
+                ViewBag.teacher = getTeacher();
+            }
+            else
+            {
+                ViewBag.teachermsg = "暂无数据";
+            }
+            //教务公告
+            if (getStudy() != null && getStudy().Count > 0)
+            {
+                ViewBag.study = getStudy();
+            }
+            else
+            {
+                ViewBag.studymsg = "暂无数据";
+            }
             ViewBag.keys = KeyWords;
             ViewBag.dec = Description;
             ViewBag.title = Title;
@@ -111,6 +154,25 @@ namespace CompanyModelProject.Controllers
         }
         public ActionResult StudyList()//教务公告
         {
+
+            //名师介绍(图片)
+            if (getTeacher() != null && getTeacher().Count > 0)
+            {
+                ViewBag.teacher = getTeacher();
+            }
+            else
+            {
+                ViewBag.teachermsg = "暂无数据";
+            }
+            //教务公告
+            if (getStudy() != null && getStudy().Count > 0)
+            {
+                ViewBag.study = getStudy();
+            }
+            else
+            {
+                ViewBag.studymsg = "暂无数据";
+            }
             ViewBag.keys = KeyWords;
             ViewBag.dec = Description;
             ViewBag.title = Title;
@@ -145,6 +207,25 @@ namespace CompanyModelProject.Controllers
         }
         public ActionResult TeacherList()//名师
         {
+            //名师介绍(图片)
+            if (getTeacher() != null && getTeacher().Count > 0)
+            {
+                ViewBag.teacher = getTeacher();
+            }
+            else
+            {
+                ViewBag.teachermsg = "暂无数据";
+            }
+            //教务公告
+            if (getStudy() != null && getStudy().Count > 0)
+            {
+                ViewBag.study = getStudy();
+            }
+            else
+            {
+                ViewBag.studymsg = "暂无数据";
+            }
+        
             ViewBag.keys = KeyWords;
             ViewBag.dec = Description;
             ViewBag.title = Title;
@@ -180,6 +261,25 @@ namespace CompanyModelProject.Controllers
 
         public ActionResult Enrollment()//招生简章
         {
+            //名师介绍(图片)
+            if (getTeacher() != null && getTeacher().Count > 0)
+            {
+                ViewBag.teacher = getTeacher();
+            }
+            else
+            {
+                ViewBag.teachermsg = "暂无数据";
+            }
+            //教务公告
+            if (getStudy() != null && getStudy().Count > 0)
+            {
+                ViewBag.study = getStudy();
+            }
+            else
+            {
+                ViewBag.studymsg = "暂无数据";
+            }
+        
             ViewBag.keys = KeyWords;
             ViewBag.dec = Description;
             ViewBag.title = Title;
@@ -215,11 +315,45 @@ namespace CompanyModelProject.Controllers
       
         public ActionResult ProblemList()//常见问题
         {
+            //名师介绍(图片)
+            if (getTeacher() != null && getTeacher().Count > 0)
+            {
+                ViewBag.teacher = getTeacher();
+            }
+            else
+            {
+                ViewBag.teachermsg = "暂无数据";
+            }
+            //教务公告
+            if (getStudy() != null && getStudy().Count > 0)
+            {
+                ViewBag.study = getStudy();
+            }
+            else
+            {
+                ViewBag.studymsg = "暂无数据";
+            }
             ViewBag.keys = KeyWords;
             ViewBag.dec = Description;
             ViewBag.title = Title;
-            List<NewsWebModel> List = news.getTopList(20, 39, "");
-            if (List != null && List.Count > 0)
+            int page = RequestQueryString.GetQueryInt("page", 1);
+            int size = 20;
+            int total = 0;
+            int count = 0;
+            string strwhere = null;
+            List<string> urllist = new List<string>();
+            string url = "/Home/Enrollment?page={0}";
+            strwhere = " and ColumnId=39";
+            List<NewsWebModel> List = news.GetwebPageList(page, size, ref total, ref count, strwhere);
+            for (int i = 0; i < count; i++)
+            {
+                urllist.Add(string.Format(url, (i + 1)));
+            }
+            ViewBag.Url = urllist;
+            ViewBag.PageIndex = page;
+            ViewBag.webdata = List;
+            ViewBag.count = total;
+            if (List != null)
             {
                 ViewBag.data = List;
             }
@@ -234,20 +368,36 @@ namespace CompanyModelProject.Controllers
       
         public ActionResult ContactUs()//联系我们
         {
-               ViewBag.keys = KeyWords;
-             ViewBag.dec = Description;
+            ViewBag.keys = KeyWords;
+            ViewBag.dec = Description;
             ViewBag.title = Title;
-            List<NewsModel> list = news.getlist().Where(p => p.ColumnId == 40).ToList();
+            if (getTeacher() != null && getTeacher().Count > 0)
+            {
+                ViewBag.teacher = getTeacher();
+            }
+            else
+            {
+                ViewBag.teachermsg = "暂无数据";
+            }
+            //教务公告
+            if (getStudy() != null && getStudy().Count > 0)
+            {
+                ViewBag.study = getStudy();
+            }
+            else
+            {
+                ViewBag.studymsg = "暂无数据";
+            }
+            List<NewsModel> list = news.getmodelbywhere(" and ColumnId=40 ");
             if (list != null && list.Count > 0)
             {
-                ViewBag.data = list[0].Main;
+                ViewBag.data = list[0];
             }
             else
             {
                 ViewBag.data = null;
-                ViewBag.meg = "暂无数据";
             }
-            return View();
+            return View(ViewBag.data); 
 
         }
         
@@ -256,36 +406,69 @@ namespace CompanyModelProject.Controllers
              ViewBag.keys = KeyWords;
              ViewBag.dec = Description;
             ViewBag.title = Title;
-            List<NewsModel> list = news.getlist().Where(p => p.ColumnId == 20).ToList();
-            if (list != null && list.Count > 0)
+            if (getTeacher() != null && getTeacher().Count > 0)
             {
-                ViewBag.data = list[0].Main;
+                ViewBag.teacher = getTeacher();
             }
             else
             {
-                ViewBag.data = null;
-                ViewBag.meg = "暂无数据";
+                ViewBag.teachermsg = "暂无数据";
             }
-            return View();
-
+            //教务公告
+            if (getStudy() != null && getStudy().Count > 0)
+            {
+                ViewBag.study = getStudy();
+            }
+            else
+            {
+                ViewBag.studymsg = "暂无数据";
+            }
+            List<NewsModel> list = news.getmodelbywhere(" and ColumnId=20 ");
+            if (list != null && list.Count > 0)
+            {
+                ViewBag.data = list[0];
+            }
+            else
+            {
+                ViewBag.data =null;
+            }
+            return View(ViewBag.data); 
         }
 
         public ActionResult Training()//企业内训 一篇文章
         {
-             ViewBag.keys = KeyWords;
-             ViewBag.dec = Description;
-            ViewBag.title = Title;
-            List<NewsModel> list = news.getlist().Where(p => p.ColumnId == 52).ToList();
-            if (list != null && list.Count > 0)
+            if (getTeacher() != null && getTeacher().Count > 0)
             {
-                ViewBag.data = list[0].Main;
+                ViewBag.teacher = getTeacher();
             }
             else
             {
-                ViewBag.data = null;
-                ViewBag.meg = "暂无数据";
+                ViewBag.teachermsg = "暂无数据";
             }
-            return View();
+            //教务公告
+            if (getStudy() != null && getStudy().Count > 0)
+            {
+                ViewBag.study = getStudy();
+            }
+            else
+            {
+                ViewBag.studymsg = "暂无数据";
+            }
+             ViewBag.keys = KeyWords;
+             ViewBag.dec = Description;
+            ViewBag.title = Title;
+            List<NewsModel> list = news.getmodelbywhere(" and ColumnId=42 ");
+            if (list != null && list.Count > 0)
+            {
+                ViewBag.d = list[0];
+                return View(ViewBag.d); 
+            }
+            else
+            {
+                ViewBag.d = null;
+                return RedirectToAction("Index");
+            }
+          
 
         }
 
@@ -302,15 +485,28 @@ namespace CompanyModelProject.Controllers
        /// </summary>
        /// <param name="model"></param>
        /// <returns></returns>
-        public ActionResult AddMessage(MessageModel model)
+       /// 
+       
+        public ActionResult AddMessage()
         {
+            string main = RequestQueryString.GetQueryString("main");
+            string name = RequestQueryString.GetQueryString("name");
+            string plone = RequestQueryString.GetQueryString("plone");
             MessageServices mess = new MessageServices();
+            MessageModel model = new MessageModel();
+            model.phone = plone;
+            model.username = name;
+            model.main = main;
             int res = mess.Insert(model);
             if (res != 0)
             {
-                return  View("<script>alert('在线报名成功，请等待系统确认！');</script>");
+                return Json(new { code = 0, message = "在线报名成功，请等待系统确认！" }, JsonRequestBehavior.AllowGet); 
             }
-            return View();
+            else
+            {
+                return Json(new { code = 1, message = "请稍后重试！" }, JsonRequestBehavior.AllowGet); 
+            }
+            
         } 
         /// <summary>
         /// 左侧名师
@@ -331,7 +527,55 @@ namespace CompanyModelProject.Controllers
             return list;
         }
 
+        public ActionResult getTeacherHandler()
+        {
 
-        
+            List<NewsWebModel> list = getTeacher();
+                StringBuilder sb = new StringBuilder();
+                if (list != null && list.Count > 0)
+                {
+                    sb.Append("[");
+                    foreach (var item in list)
+                    {
+                        sb.Append("{");
+                        sb.Append("'Id':'" + item.ID + "','Name':'" + item.Title + "','pic':'"+item.picUrl +"','HtmlUrl':'"+item.HtmlUrl +"'");
+                        sb.Append("},");
+                    }
+                    sb.Append("]");
+                    return Json(new { code = 0, data = sb.ToString() }, JsonRequestBehavior.AllowGet);
+                }
+
+                else
+                {
+                    return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);
+                }
+            
+            return View();
+        }
+        public ActionResult getstudyHandler()
+        {
+
+            List<NewsWebModel> list = getStudy();
+            StringBuilder sb = new StringBuilder();
+            if (list != null && list.Count > 0)
+            {
+                sb.Append("[");
+                foreach (var item in list)
+                {
+                    sb.Append("{");
+                    sb.Append("'Id':'" + item.ID + "','Name':'" + item.Title + "','HtmlUrl':'" + item.HtmlUrl + "'"); 
+                    sb.Append("},");
+                }
+                sb.Append("]");
+                return Json(new { code = 0, data = sb.ToString() }, JsonRequestBehavior.AllowGet);
+            }
+
+            else
+            {
+                return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);
+            }
+
+            return View();
+        }
     }
 }

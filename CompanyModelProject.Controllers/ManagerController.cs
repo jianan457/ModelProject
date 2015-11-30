@@ -250,7 +250,7 @@ namespace CompanyModelProject.Controllers
             ViewBag.admin = LoginName;
             ViewBag.title = Title;
             int page = RequestQueryString.GetQueryInt("page", 1);
-            int size = 2;
+            int size = 20;
             int total = 0;
             int count = 0;
             string strwhere = null;

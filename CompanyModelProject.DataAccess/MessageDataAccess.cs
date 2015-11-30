@@ -186,8 +186,8 @@ namespace CompanyModelProject.DataAccess
             item.QQ = row.IsNull("QQ") ? string.Empty : row.Field<string>("QQ");
             item.Email = row.IsNull("Email") ? string.Empty : row.Field<string>("Email");
             item.addtime = row.IsNull("addtime") ? DateTime.Now: row.Field<DateTime>("addtime"); 
-            item.IsShow = row.IsNull("IsShow") ? false : true;
-            item.isDel = row.IsNull("isDel") ? false : true;
+            item.IsShow = row.IsNull("IsShow") ? false :  row.IsNull("IsShow");
+            item.isDel = row.IsNull("isDel") ? false : row.IsNull("isDel");
             item.Orders = row.IsNull("Orders") ? 0 : row.Field<int>("Orders");
 
             return item;

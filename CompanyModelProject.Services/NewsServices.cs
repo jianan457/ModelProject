@@ -68,6 +68,10 @@ namespace CompanyModelProject.Services
         {
             return access.getTopList(count, columnid,where);
        }
+         public List<NewsModel> getmodelbywhere(string where)
+        {
+            return access.getmodelbywhere(where);
+         }
         public  int update_delete(NewsModel model)
         {
             return access.update_delete(model);

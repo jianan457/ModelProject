@@ -33,6 +33,27 @@ namespace CompanyModelProject.DataAccess
       ,[Clicks]
       FROM [HtmlManagement ].[dbo].[News]
      with(nolock) where ID=@Id and isDel=0";
+      /// <summary>
+      /// 按条件查询信息
+      /// </summary>
+      public const string SQL_SELECT_where = @"SELECT [ID]
+      ,[ColumnId]
+      ,[Title]
+      ,[picUrl]
+      ,[Main]
+      ,[BriefMain]
+      ,[MainWithout]
+      ,[fromUrl]
+      ,[HtmlUrl]
+      ,[orders]
+      ,[Creater]
+      ,[CreateTime]
+      ,[IsClomnrecommond]
+      ,[IsIndexRecommond]
+      ,[IsDel] 
+      ,[Clicks]
+      FROM [HtmlManagement ].[dbo].[News]
+     with(nolock) where  isDel=0 ";
         /// <summary>
         /// 查询所有信息
         /// </summary>
@@ -69,7 +90,7 @@ namespace CompanyModelProject.DataAccess
       ,[IsClomnrecommond]
       ,[IsIndexRecommond]
       ,[IsDel] 
-       FROM [HtmlManagement].[dbo].[News] with(nolock) where ColumnId=@ColumnId and isDel=0";
+       FROM [HtmlManagement].[dbo].[News] with(nolock) where ColumnId=@ColumnId and isDel=0 order by orders ";
 
         /// <summary>
         /// 查询某个栏目前几条数据
@@ -86,7 +107,7 @@ namespace CompanyModelProject.DataAccess
       ,[IsIndexRecommond]
       ,[IsDel]
       ,[Clicks]
-       FROM [News] with(nolock) where ColumnId=@ColumnId and isDel=0";
+       FROM [News] with(nolock) where ColumnId=@ColumnId and isDel=0 ";
 
         public const string SQL_UPDATE = @"UPDATE [dbo].[News] 
        SET [ColumnId] = @ColumnId 
@@ -332,7 +353,33 @@ namespace CompanyModelProject.DataAccess
             }
             return list;
         }
-
+      /// <summary>
+      /// 按条件查询
+      /// </summary>
+      /// <param name="colID"></param>
+      /// <returns></returns>
+        public List<NewsModel> getmodelbywhere(string where)
+        {
+            List<NewsModel> list = new List<NewsModel>();
+            StringBuilder sb = new StringBuilder(SQL_SELECT_where);
+            if (where != "")
+            {
+                sb.Append(where);
+            }
+            DataSet ds = DbHelper.GetInstance(ConnectionStringUtility.ConnectionString).ExecuteDataset(CommandType.Text, sb.ToString());
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    list.Add(RowToModel(dr));
+                }
+            }
+            else
+            {
+                list = null;
+            }
+            return list;
+        }
       /// <summary>
       /// 查询某个栏目的钱COUNT条数据
       /// </summary>
@@ -344,7 +391,7 @@ namespace CompanyModelProject.DataAccess
             StringBuilder sb = new StringBuilder(SQL_SELECT_TOP);
             if (where!="")
             {
-                sb.Append(where);
+                sb.Append(where +" order by orders ");
             }
             List<NewsWebModel> list = new List<NewsWebModel>();
             SqlParameter[] paras = { 
@@ -434,7 +481,7 @@ namespace CompanyModelProject.DataAccess
             string strProc = "[PKG_PageData]";//存储过程名
             string sTable = " [dbo].[News]";
             string sPkey = " ID";
-            string sField = "ID,[ColumnId],[picUrl] ,[Title],[orders] ,HtmlUrl,[Creater] ,[CreateTime] ,[IsClomnrecommond] ,[IsIndexRecommond] ,[IsDel],Clicks";//
+            string sField = "ID,[ColumnId],[picUrl] ,[Title],[orders] ,HtmlUrl,[Creater],[BriefMain] ,[CreateTime] ,[IsClomnrecommond] ,[IsIndexRecommond] ,[IsDel],Clicks";//
             StringBuilder sb = new StringBuilder();
             sb.Append(" isDel=0");
             if (strwhere != null && strwhere != "")
@@ -481,10 +528,9 @@ namespace CompanyModelProject.DataAccess
             item.fromUrl = row.IsNull("fromUrl") ? string.Empty : row.Field<string>("fromUrl");
             item.CreateTime = row.IsNull("CreateTime") ? DateTime.Now : row.Field<DateTime>("CreateTime");
             item.orders = row.IsNull("orders") ? 0 : row.Field<int>("orders");
-            item.IsClomnrecommond = row.IsNull("IsClomnrecommond") ? false : true;
-            item.IsIndexRecommond = row.IsNull("IsIndexRecommond") ? false : true; 
-            item.isDel = row.IsNull("isDel") ? false : true;
-
+            item.IsClomnrecommond = row.IsNull("IsClomnrecommond") ? false : row.Field<bool>("IsClomnrecommond");
+            item.IsIndexRecommond = row.IsNull("IsIndexRecommond") ? false : row.Field<bool>("IsIndexRecommond");
+            item.isDel = row.IsNull("isDel") ? false : true; 
             return item;
         }
         private static pageModel pageRowToModel(DataRow row)
@@ -498,8 +544,8 @@ namespace CompanyModelProject.DataAccess
             item.HtmlUrl = row.IsNull("HtmlUrl") ? string.Empty : row.Field<string>("HtmlUrl");  
             item.CreateTime = row.IsNull("CreateTime") ? DateTime.Now : row.Field<DateTime>("CreateTime");
             item.orders = row.IsNull("orders") ? 0 : row.Field<int>("orders");
-            item.IsClomnrecommond = row.IsNull("IsClomnrecommond") ? false : true;
-            item.IsIndexRecommond = row.IsNull("IsIndexRecommond") ? false : true;
+            item.IsClomnrecommond = row.IsNull("IsClomnrecommond") ? false : row.Field<bool>("IsClomnrecommond");
+            item.IsIndexRecommond = row.IsNull("IsIndexRecommond") ? false : row.Field<bool>("IsIndexRecommond");
             item.isDel = row.IsNull("isDel") ? false : true; 
             return item;
         }
@@ -515,8 +561,8 @@ namespace CompanyModelProject.DataAccess
             item.BriefMain = row.IsNull("BriefMain") ? string.Empty : row.Field<string>("BriefMain"); 
             item.CreateTime = row.IsNull("CreateTime") ? DateTime.Now : row.Field<DateTime>("CreateTime");
             item.orders = row.IsNull("orders") ? 0 : row.Field<int>("orders");
-            item.IsClomnrecommond = row.IsNull("IsClomnrecommond") ? false : true;
-            item.IsIndexRecommond = row.IsNull("IsIndexRecommond") ? false : true;
+            item.IsClomnrecommond = row.IsNull("IsClomnrecommond")? false:row.Field<bool>("IsClomnrecommond");
+            item.IsIndexRecommond = row.IsNull("IsIndexRecommond")? false:row.Field<bool>("IsIndexRecommond");
             item.isDel = row.IsNull("isDel") ? false : true;
             item.Clicks = row.IsNull("Clicks") ? 0 : row.Field<int>("Clicks");
             return item;

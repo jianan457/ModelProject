@@ -17,7 +17,7 @@ namespace CompanyModelProject.IServices
         int Delete(int id);
         int update(NewsModel model);
         int del_list(string where);
-
+        List<NewsModel> getmodelbywhere(string where);
         List<NewsWebModel> getTopList(int count, int columnid,string where);
         int update_delete(NewsModel model);
         /// <summary>

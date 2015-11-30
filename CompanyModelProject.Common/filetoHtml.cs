@@ -9,16 +9,27 @@ namespace CompanyModelProject.Common
 {
     public class FileToHtml
     {
-        public static string WriteFile(string strTitle, string strContent, string datetime)//文章详情
-        {
-            string path = HttpContext.Current.Server.MapPath("/WebHtml/" + DateTime.Now.ToString("yyyyMMdd"));
+        public static string WriteFile(string strTitle, string strContent, string datetime,string Column,string brief,string pic)//文章详情
+        { 
+            string path = HttpContext.Current.Server.MapPath("/WebHtml/" + DateTime.Now.ToString("yyyyMMdd")+"/");
+            string filepath = string.Empty;
+            string temp = string.Empty;
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);///创建文件夹
-            } 
+            }
+            filepath = "/WebHtml/" + DateTime.Now.ToString("yyyyMMdd") + "/";
             Encoding code = Encoding.GetEncoding("gb2312");
             // 读取模板文件
-            string temp = HttpContext.Current.Server.MapPath("/Temple/NewsTemple.html");
+            if (Column == "名师介绍")
+            {
+                 temp = HttpContext.Current.Server.MapPath("/Temple/TeacherTemple.html");
+            }
+            else
+            {
+                 temp = HttpContext.Current.Server.MapPath("/Temple/NewsTemple.html");
+            }
+          
             StreamReader sr = null;
             StreamWriter sw = null;
             string str = "";
@@ -37,9 +48,16 @@ namespace CompanyModelProject.Common
             // 替换内容
             // 这时,模板文件已经读入到名称为str的变量中了
             //str = str.Replace("Title", strTitle); //模板页中的ShowArticle
-            str = str.Replace("biaoti", strTitle);
-            str = str.Replace("content", strContent);
-            str = str.Replace("author", datetime);
+            str = str.Replace("$Title$", strTitle);
+            str = str.Replace("$Main$", strContent);
+            str = str.Replace("$AddTime$", datetime);
+            str = str.Replace("$ColumnId$", Column);
+            if (Column == "名师介绍")
+            {
+                str = str.Replace("$MainBrief$", brief);
+                str = str.Replace("$TitlePic$", pic);
+                
+            }
             // 写文件
             try
             {
@@ -56,10 +74,7 @@ namespace CompanyModelProject.Common
             {
                 sw.Close();
             }
-            return path + htmlfilename;
-        }
-
-
-       
+            return filepath + htmlfilename;
+        } 
     }
 }
