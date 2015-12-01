@@ -14,7 +14,7 @@
 .taer_img2{float: left;width: 82px;margin-left:16px;margin-top:10px;display: block;}
 .taer_img2 div{text-align: center;color: #323232;}
 
-.words_there1{width: 314px;border: 0px solid red;clear:both;margin-top:10px;height:615px}
+.words_there1{width: 314px;border: 0px solid red;clear:both;margin-top:10px;height:auto;}
 .words_there_top1{width:314px;height:32px;border-bottom: 0px solid #AAAAAA;}
 .words_there_title1{width: 73px;height:27px;background: #8F0100;margin-top: 2px;float: left ;text-align: center;color: #fff;line-height:27px;font-weight: bold;}
 .words_there1 ul{margin-top: 5px;width: 290px;border: 0px solid red;margin-right:10px;margin-bottom:8px;float: right;}
@@ -76,7 +76,7 @@
 .tear_title{width: 633px;height: 232px;border: 0px solid red;margin: 0 auto;margin-top:20px;margin-bottom: 30px;}
 .taer_title_img{width: 191px;height:232px;border: 0px solid red;float: left;}
 .tear_content{width:426px;height:99px;border-bottom: 2px solid #1296D7;float: right;}
-.taer_name{width:100px;height:70px;border: 0px solid red;text-align: center;line-height:90px;font-size:18px;
+.taer_name{width:120px;height:70px;border: 0px solid red;text-align: center;line-height:90px;font-size:18px;
 font-weight: bold;margin-top:20px;}
 .tear_xueli{border: 0px solid red;color: #676769 ;}
 .tear_xueli {height:230px;width:426px;margin-left:15px}

@@ -97,13 +97,6 @@
                     </div>
                 </div>
             </div>
-            @*<script type="text/javascript" src="js/jquery.pin.min.js"></script>
-                <script>
-                    $(".pinned").pin({
-                        containerSelector: ".box"
-                    })
-                </script>*@
-
         </div>
     </div>
     <div class="public_right">
@@ -119,7 +112,7 @@
                     {
                         <li>
                             <div class="new_title">
-                                <a href="@item.HtmlUrl"><span style="width:570px">&nbsp;&nbsp;&nbsp;·@item.Title</span><span>@item.CreateTime.ToString("yyyy-MM-dd")</span></a>
+                                <a href="@item.HtmlUrl"><span style="width:570px">&nbsp;&nbsp;&nbsp;·@(item.Title.Length > 36 ? item.Title.Substring(0, 36) : item.Title)</span><span>@item.CreateTime.ToString("yyyy-MM-dd")</span></a>
                             </div>
                         </li> 
                     }

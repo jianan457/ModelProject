@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="box" style="border:0px solid red;height:615px">
+        <div class="box" style="border:0px solid red;height:auto">
             <div class="words_there1 pinned">
                 <div class="words_there_top1">
                     <div class="words_there_title1">教务公告</div>
@@ -119,7 +119,7 @@
                     { 
                         <li>
                             <div class="new_title">
-                                <a href="@item.HtmlUrl"><span style="width:570px">&nbsp;&nbsp;&nbsp;·@item.Title</span><span>@item.CreateTime.ToString("yyyy-MM-dd")</span></a>
+                                <a href="@item.HtmlUrl"><span style="width:570px">&nbsp;&nbsp;&nbsp;·@(item.Title.Length > 36 ? item.Title.Substring(0, 36) : item.Title)</span><span>@item.CreateTime.ToString("yyyy-MM-dd")</span></a>
                             </div>
                         </li>
                     }
