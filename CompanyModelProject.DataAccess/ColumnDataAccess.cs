@@ -285,8 +285,8 @@ namespace CompanyModelProject.DataAccess
             item.Upid = row.IsNull("Upid") ? 0 : row.Field<int>("Upid");
             item.AddUser = row.IsNull("AddUser") ? string.Empty : row.Field<string>("AddUser");
             item.AddTime = row.IsNull("AddTime") ? DateTime.Now : row.Field<DateTime>("AddTime");
-            item.IsShow = row.IsNull("IsShow") ? false : true;
-            item.IsDel = row.IsNull("IsDel") ? false : true;
+            item.IsShow = row.IsNull("IsShow") ? false : row.Field<bool>("IsShow");
+            item.IsDel = row.IsNull("IsDel") ? false : row.Field<bool>("IsDel");
             item.Orders = row.IsNull("Orders") ? 0 : row.Field<int>("Orders");
             return item;
         }

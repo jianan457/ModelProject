@@ -18,7 +18,7 @@ namespace CompanyModelProject.Controllers
         {
             return View();
         }
-
+        [UserLoginFilter]
         public ActionResult Regisiter()
         {
             ViewBag.RightsId = RightsId;
@@ -59,14 +59,15 @@ namespace CompanyModelProject.Controllers
         {
             AdminInfoModel m = service.getLoginInfo(model.AdminName, model.Pwd);
             if (m != null)
-            {
-
+            { 
                 Common.CookieManager cm = new Common.CookieManager();
-                cm.setCookie("userinfo", "name=" + m.AdminName + "&Id=" + m.ID + "&email=" + m.Email, DateTime.Now.AddHours(2), "www.model.com", "/");
-
-                return RedirectToAction("Index", "Manager");//返回到列表
+                cm.setCookie("userinfo", "name=" + m.AdminName + "&Id=" + m.ID + "&email=" + m.Email, DateTime.Now.AddHours(2), "www.zzdxemba.com", "/");
+                return RedirectToAction("Index", "Manager");//进入后台
             }
-            return RedirectToAction("Login");
+            else
+            {
+                return RedirectToAction("login");
+            }
 
         }
 

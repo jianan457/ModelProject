@@ -8,6 +8,7 @@ using CompanyModelProject.Services;
 using CompanyModelProject.Common;
 using System.Web;
 using System.IO;
+using Controllers.Filter;
 namespace CompanyModelProject.Controllers
 {
     public class NewsController : BaseController
@@ -15,12 +16,11 @@ namespace CompanyModelProject.Controllers
 
         ColumnServices service = new ColumnServices();
         NewsServices newsService = new NewsServices();
+        [UserLoginFilter]
         public ActionResult NewsAdd()
         {
             ViewBag.RightsId = RightsId;
-            ViewBag.liId = "columnli3";
-            ViewBag.keys = KeyWords;
-            ViewBag.dec = Description;
+            ViewBag.liId = "columnli3"; 
             ViewBag.admin = LoginName;
             ViewBag.title = Title;
             return View();
@@ -60,7 +60,7 @@ namespace CompanyModelProject.Controllers
 
             return View();
         }
-
+        [UserLoginFilter]
         public ActionResult NewsList()
         {
             ViewBag.RightsId = RightsId;
@@ -237,7 +237,7 @@ namespace CompanyModelProject.Controllers
             }
             return Json(new { code = "1", message = "上传失败", url = "" });
         }
-
+        [UserLoginFilter]
         public ActionResult NewsModtify(int id)
         {
             ViewBag.RightsId = RightsId;
@@ -362,6 +362,8 @@ namespace CompanyModelProject.Controllers
         /// 首页生成静态页
         /// </summary>
         /// <returns></returns>
+        /// 
+        [UserLoginFilter]
         public ActionResult IndexToHtml()
         {
             ViewBag.RightsId = RightsId;
@@ -521,6 +523,9 @@ namespace CompanyModelProject.Controllers
                 sr.Close();
             }
             string htmlfilename =Server.MapPath("/Index.html");
+            str = str.Replace("$keys$", KeyWords);
+            str = str.Replace("$dec$", Description);
+
             str = str.Replace("$newslist1$", sb1);
             str = str.Replace("$newslist2$", sb2);
             str = str.Replace("$newslist3$", sb3);
@@ -529,6 +534,7 @@ namespace CompanyModelProject.Controllers
             str = str.Replace("$newslist6$", sb6);
             str = str.Replace("$newslist7$", sb7);
             str = str.Replace("$newslist8$", sb8);
+            
             try
             {
                 sw = new StreamWriter(htmlfilename, false, code);

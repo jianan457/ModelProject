@@ -31,7 +31,7 @@ namespace CompanyModelProject.DataAccess
       ,[Pwd]
       ,Email
       ,[isDel]
- ,[IsShow]
+      ,[IsShow]
       FROM [HtmlManagement].[dbo].[AdminInfo] with(nolock) where isDel=0 and isshow=1 order by [ID] desc ";
         /// <summary>
         /// 根据用户名查询用户
@@ -242,8 +242,9 @@ namespace CompanyModelProject.DataAccess
             item.ID = row.IsNull("ID") ? 0 : row.Field<int>("Id"); 
             item.AdminName = row.IsNull("AdminName") ? string.Empty : row.Field<string>("AdminName");
             item.Pwd = row.IsNull("Pwd") ? string.Empty : row.Field<string>("Pwd");
-            item.Email = row.IsNull("Email") ? string.Empty : row.Field<string>("Email");  
-            item.IsDel = row.IsNull("IsDel") ? false : true;
+            item.Email = row.IsNull("Email") ? string.Empty : row.Field<string>("Email");
+            item.IsShow = row.IsNull("IsShow") ? false : row.Field<bool>("IsShow");
+            item.IsDel = row.IsNull("IsDel") ? false : row.Field<bool>("IsDel");
             return item;
         }
         #endregion

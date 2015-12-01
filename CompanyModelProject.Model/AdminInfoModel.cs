@@ -22,5 +22,7 @@ namespace CompanyModelProject.Model
         public string Email { get; set; }
 
         public bool IsDel { get; set; }
+
+        public bool IsShow { get; set; }
     }
 }

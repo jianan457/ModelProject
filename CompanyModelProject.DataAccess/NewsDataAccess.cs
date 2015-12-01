@@ -530,7 +530,7 @@ namespace CompanyModelProject.DataAccess
             item.orders = row.IsNull("orders") ? 0 : row.Field<int>("orders");
             item.IsClomnrecommond = row.IsNull("IsClomnrecommond") ? false : row.Field<bool>("IsClomnrecommond");
             item.IsIndexRecommond = row.IsNull("IsIndexRecommond") ? false : row.Field<bool>("IsIndexRecommond");
-            item.isDel = row.IsNull("isDel") ? false : true; 
+            item.isDel = row.IsNull("isDel") ? false : row.Field<bool>("isDel");
             return item;
         }
         private static pageModel pageRowToModel(DataRow row)
@@ -546,7 +546,7 @@ namespace CompanyModelProject.DataAccess
             item.orders = row.IsNull("orders") ? 0 : row.Field<int>("orders");
             item.IsClomnrecommond = row.IsNull("IsClomnrecommond") ? false : row.Field<bool>("IsClomnrecommond");
             item.IsIndexRecommond = row.IsNull("IsIndexRecommond") ? false : row.Field<bool>("IsIndexRecommond");
-            item.isDel = row.IsNull("isDel") ? false : true; 
+            item.isDel = row.IsNull("isDel") ? false : row.Field<bool>("isDel");
             return item;
         }
 
@@ -563,7 +563,7 @@ namespace CompanyModelProject.DataAccess
             item.orders = row.IsNull("orders") ? 0 : row.Field<int>("orders");
             item.IsClomnrecommond = row.IsNull("IsClomnrecommond")? false:row.Field<bool>("IsClomnrecommond");
             item.IsIndexRecommond = row.IsNull("IsIndexRecommond")? false:row.Field<bool>("IsIndexRecommond");
-            item.isDel = row.IsNull("isDel") ? false : true;
+            item.isDel = row.IsNull("isDel") ? false : row.Field<bool>("isDel");
             item.Clicks = row.IsNull("Clicks") ? 0 : row.Field<int>("Clicks");
             return item;
         }
