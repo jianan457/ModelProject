@@ -141,7 +141,7 @@
                     foreach (var item in ViewBag.teacher)
                     {
                         <div class="taer_img1">
-                            <a href="@item.HtmlUrl" target="_blank"><img class="lazy" data-original="@item.picUrl" alt="@item.Title" width="82px" height="109px" /></a>
+                            <a href="@item.HtmlUrl" target="_blank"><img class="lazy" data-original="@item.picUrl" alt="@item.Title" width="88px" height="109px" /></a>
                             <div>
                                 @item.Title
                             </div>
@@ -170,8 +170,7 @@
                 {
                     <div class="student_list3" style="height:20px">
                         <a href="@item.HtmlUrl" target="_blank">@(item.Title.Length > 20 ? item.Title.Substring(0, 20)  : item.Title)</a>
-                    </div>
-
+                    </div> 
                 }
             }
         </div>
