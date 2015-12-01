@@ -69,7 +69,7 @@
                 {
                     foreach (var item in ViewBag.study)
                     {
-                        <div class="fll2" style="height:28px;line-height:25px;"><a href="@item.HtmlUrl" alt="@item.Title" target="_blank"> •  @(item.Title.Length > 22 ? item.Title.Substring(0, 22) + "…" : item.Title)</a></div>
+                        <div class="fll2" style="height:28px;line-height:25px;"><a href="@item.HtmlUrl" alt="@item.Title" target="_blank"> •  @(item.Title.Length > 26 ? item.Title.Substring(0, 26)  : item.Title)</a></div>
                     }
                 }
             </div>
@@ -99,7 +99,7 @@
                                     <img class="lazy" data-original="@item.picUrl" alt="@item.Title" />
                                     <div class="new_wodrs_list">
                                         <div class="new_wodrs_list_title">
-                                            <b>@item.Title</b>
+                                            <b>@(item.Title.Length>35?item.Title.Substring(0,35):item.Title)</b>
                                         </div>
                                         <div class="new_num">
                                             &nbsp;&nbsp; @(item.BriefMain.Length > 60 ? item.BriefMain.Substring(0, 60) + "…" : item.BriefMain)
@@ -117,7 +117,7 @@
                                         @item.CreateTime.ToString("yyyy-MM-dd")
                                     </div>
                                     <div class="new_num_title">
-                                        <a href="@item.HtmlUrl" target="_blank"> @(item.Title.Length > 36 ? item.Title.Substring(0, 36) + "…" : item.Title)</a>
+                                        <a href="@item.HtmlUrl" target="_blank"> @(item.Title.Length > 36 ? item.Title.Substring(0, 36)  : item.Title)</a>
                                     </div>
                                 </li>
                             }
@@ -169,7 +169,7 @@
                 foreach (var item in ViewBag.student)
                 {
                     <div class="student_list3" style="height:20px">
-                        <a href="@item.HtmlUrl" target="_blank">@(item.Title.Length > 20 ? item.Title.Substring(0, 20) + "…" : item.Title)</a>
+                        <a href="@item.HtmlUrl" target="_blank">@(item.Title.Length > 20 ? item.Title.Substring(0, 20)  : item.Title)</a>
                     </div>
 
                 }
@@ -186,7 +186,7 @@
             {
                 foreach (var item in ViewBag.stucom)
                 {
-                    <div class="student_list_xue" style="height:20px"><a href="@item.HtmlUrl" target="_blank">@(item.Title.Length > 20 ? item.Title.Substring(0, 20) + "…" : item.Title)</a></div>
+                    <div class="student_list_xue" style="height:20px"><a href="@item.HtmlUrl" target="_blank">@(item.Title.Length > 20 ? item.Title.Substring(0, 20) : item.Title)</a></div>
                 }
             }
         </div>
@@ -201,7 +201,7 @@
             {
                 foreach (var item in ViewBag.managenews)
                 {
-                    <div class="student_list3" style="height:20px;width:320px;"><div style="width:210px"><a href="@item.HtmlUrl" target="_blank">@(item.Title.Length > 16 ? item.Title.Substring(0, 16) + "…" : item.Title)</a></div><div class="stu_one">@item.CreateTime.ToString("MM-dd")</div></div>
+                    <div class="student_list3" style="height:20px;width:320px;"><div style="width:210px"><a href="@item.HtmlUrl" target="_blank">@(item.Title.Length > 16 ? item.Title.Substring(0, 16) : item.Title)</a></div><div class="stu_one">@item.CreateTime.ToString("MM-dd")</div></div>
 
                 }
             }

@@ -549,8 +549,6 @@ namespace CompanyModelProject.Controllers
                 {
                     return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);
                 }
-            
-            return View();
         }
         public ActionResult getstudyHandler()
         {
@@ -575,7 +573,6 @@ namespace CompanyModelProject.Controllers
                 return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);
             }
 
-            return View();
         }
     }
 }

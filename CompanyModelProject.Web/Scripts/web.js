@@ -52,8 +52,11 @@ function getstudy() {
     $.get('/Home/getstudyHandler?date=' + new Date(), {}, function (data) {
         if (data.code == 0) {
             var obj = eval(data.data);
-            for (var i = 0; i < obj.length; i++) { 
-             html += '<li><span class="fll1"> <a href="' + obj[i].HtmlUrl + '"> • ' + obj[i].Name+ '</a></span></li>';
+            for (var i = 0; i < obj.length; i++) {
+                if (obj[i].Name.length>25) {
+                    obj[i].Name = obj[i].Name.toString().substring(0, 25);
+                }
+             html += '<li><span class="fll1"> <a href="' + obj[i].HtmlUrl + '"> • ' + obj[i].Name +'</a></span></li>';
             }
             $("#studyul").html(html);
             }

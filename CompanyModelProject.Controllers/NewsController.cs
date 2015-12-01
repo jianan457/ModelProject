@@ -386,7 +386,7 @@ namespace CompanyModelProject.Controllers
                         sb1.Append(" <li class='id1'>");
                         sb1.AppendFormat("<img class='lazy' src='..{0}' alt='{1}'/>", list1[i].picUrl, list1[i].Title);
                         sb1.Append("<div class='new_wodrs_list'><div class='new_wodrs_list_title'>");
-                        sb1.AppendFormat("<b>{0}</b>", list1[i].Title);
+                        sb1.AppendFormat("<b>{0}</b>", list1[i].Title.Length > 35?list1[i].Title.Substring(0,35):list1[i].Title);
                         sb1.Append(" </div> <div class='new_num'>");
                         sb1.AppendFormat("&nbsp;&nbsp; &nbsp;&nbsp;{0}", list1[i].BriefMain.Length > 60 ? list1[i].BriefMain.Substring(0, 60) + "…" : list1[i].BriefMain);
                         sb1.Append("</div> <div class='flass'>");
@@ -398,7 +398,7 @@ namespace CompanyModelProject.Controllers
                         sb1.Append(" <li class='id2' style='width:100%;'>");
                         sb1.AppendFormat(" <div class='new_wodrs_list_time'>{0}</div>", list1[i].CreateTime.ToString("yyyy-MM-dd"));
                         sb1.Append(" <div class='new_num_title'>");
-                        sb1.AppendFormat(" <a href='{0}' target='_blank'>{1}</a>", list1[i].HtmlUrl, list1[i].Title.Length > 36 ? list1[i].Title.Substring(0, 36) + "…" : list1[i].Title);
+                        sb1.AppendFormat(" <a href='{0}' target='_blank'>{1}</a>", list1[i].HtmlUrl, list1[i].Title.Length > 36 ? list1[i].Title.Substring(0, 36) : list1[i].Title);
                         sb1.Append(" </div></li>");
                     }
                 }
@@ -411,9 +411,9 @@ namespace CompanyModelProject.Controllers
                 for (int i = 0; i < list2.Count; i++)
                 {
                     string title = list2[i].Title;
-                    if (list2[i].Title.Length > 22)
+                    if (list2[i].Title.Length > 26)
                     {
-                        title = title.Substring(0, 22);
+                        title = title.Substring(0, 26);
                     }
                     sb2.AppendFormat("<div class='fll2' style='height:28px;line-height:25px;'><a href='{1}' alt='{0}' target='_blank'> {0})</a></div>", title, list2[i].HtmlUrl);
                 }
@@ -438,7 +438,7 @@ namespace CompanyModelProject.Controllers
                 for (int i = 0; i < list4.Count; i++)
                 {
                     sb4.Append(" <div class='student_list3' style='height:20px'>");
-                    sb4.AppendFormat("<a href='{0}' target='_blank'>{1}</a> </div>", list4[i].HtmlUrl, list4[i].Title.Length > 20 ? list4[i].Title.Substring(0, 20) + "…" : list4[i].Title);
+                    sb4.AppendFormat("<a href='{0}' target='_blank'>{1}</a> </div>", list4[i].HtmlUrl, list4[i].Title.Length > 20 ? list4[i].Title.Substring(0, 20)  : list4[i].Title);
             
                 }
             }
@@ -450,7 +450,7 @@ namespace CompanyModelProject.Controllers
                 for (int i = 0; i < list5.Count; i++)
                 {
                     sb5.Append(" <div class='student_list_xue' style='height:20px'>");
-                    sb5.AppendFormat("<a href='{0}' target='_blank'>{1}</a> </div>", list5[i].HtmlUrl, list5[i].Title.Length > 20 ? list5[i].Title.Substring(0, 20) + "…" : list5[i].Title);
+                    sb5.AppendFormat("<a href='{0}' target='_blank'>{1}</a> </div>", list5[i].HtmlUrl, list5[i].Title.Length > 20 ? list5[i].Title.Substring(0, 20)  : list5[i].Title);
                 }
             }
             //管理资讯
@@ -460,7 +460,7 @@ namespace CompanyModelProject.Controllers
             {
                 for (int i = 0; i < list6.Count; i++)
                 {
-                    sb6.AppendFormat(" <div class='student_list3' style='height:20px;width:320px;'><div style='width:210px'><a href='{0}' target='_blank'>{1}</a></div><div class='stu_one'>{2}</div></div>", list6[i].HtmlUrl, list6[i].Title.Length > 16 ? list6[i].Title.Substring(0, 16) + "…" : list6[i].Title, list6[i].CreateTime.ToString("MM-dd"));
+                    sb6.AppendFormat(" <div class='student_list3' style='height:20px;width:320px;'><div style='width:210px'><a href='{0}' target='_blank'>{1}</a></div><div class='stu_one'>{2}</div></div>", list6[i].HtmlUrl, list6[i].Title.Length > 16 ? list6[i].Title.Substring(0, 16)  : list6[i].Title, list6[i].CreateTime.ToString("MM-dd"));
                 }
             }
             //名师介绍(图片)
