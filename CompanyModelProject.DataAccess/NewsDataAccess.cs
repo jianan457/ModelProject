@@ -101,6 +101,7 @@ namespace CompanyModelProject.DataAccess
       ,[picUrl] 
       ,[BriefMain] 
       ,[HtmlUrl]
+,fromUrl
       ,[orders] 
       ,[CreateTime]
       ,[IsClomnrecommond]
@@ -481,7 +482,7 @@ namespace CompanyModelProject.DataAccess
             string strProc = "[PKG_PageData]";//存储过程名
             string sTable = " [dbo].[News]";
             string sPkey = " ID";
-            string sField = "ID,[ColumnId],[picUrl] ,[Title],[orders] ,HtmlUrl,[Creater],[BriefMain] ,[CreateTime] ,[IsClomnrecommond] ,[IsIndexRecommond] ,[IsDel],Clicks";//
+            string sField = "ID,[ColumnId],[picUrl] ,fromUrl,[Title],[orders] ,HtmlUrl,[Creater],[BriefMain] ,[CreateTime] ,[IsClomnrecommond] ,[IsIndexRecommond] ,[IsDel],Clicks";//
             StringBuilder sb = new StringBuilder();
             sb.Append(" isDel=0");
             if (strwhere != null && strwhere != "")
@@ -558,6 +559,7 @@ namespace CompanyModelProject.DataAccess
             item.ColumnId = row.IsNull("ColumnId") ? 0 : row.Field<int>("ColumnId"); 
             item.HtmlUrl = row.IsNull("HtmlUrl") ? string.Empty : row.Field<string>("HtmlUrl");
             item.picUrl = row.IsNull("picUrl") ? string.Empty : row.Field<string>("picUrl");
+            item.fromUrl = row.IsNull("fromUrl") ? string.Empty : row.Field<string>("fromUrl");
             item.BriefMain = row.IsNull("BriefMain") ? string.Empty : row.Field<string>("BriefMain"); 
             item.CreateTime = row.IsNull("CreateTime") ? DateTime.Now : row.Field<DateTime>("CreateTime");
             item.orders = row.IsNull("orders") ? 0 : row.Field<int>("orders");

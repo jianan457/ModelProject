@@ -24,5 +24,34 @@ namespace CompanyModelProject.Common
            }
            return typename;
        }
+
+
+       public static string getColumn(string cId)
+       {
+           string Columnname = string.Empty;
+           switch (cId)
+           {
+               case "学院简介": Columnname = "Summary";
+                   break;
+               case "招生简章": Columnname = "Enrollment";
+                   break;
+               case "新闻动态": Columnname = "NewsList";
+                   break;
+               case "教务公告": Columnname = "StudyList";
+                   break;
+               case "名师介绍": Columnname = "TeacherList";
+                   break;
+               case "常见问题": Columnname = "ProblemList";
+                   break;
+               case "联系我们": Columnname = "ContactUs";
+                   break;
+               case "企业内训": Columnname = "Training";
+                   break;
+               default:
+                   break;
+           }
+           return Columnname;
+       } 
+       
     }
 }

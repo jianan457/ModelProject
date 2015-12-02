@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
-<head> 
-    <!--<meta charset="gb2312" />--> 
+<head>
+    <!--<meta charset="gb2312" />-->
     <meta name="keywords" content="郑州导学工商管理高级总裁研修班" />
     <meta name="description" content="郑州导学工商管理高级总裁研修班" />
     <meta http-equiv="Content-Language" content="zh-cn">
@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="/images/logo.ico">
     <link rel="stylesheet" href="/Content/style2.css">
     <link rel="stylesheet" href="/Content/public_style.css">
-    <script type="text/javascript" src="/Scripts/jquery-1.7.2.min.js"></script>  
+    <script type="text/javascript" src="/Scripts/jquery-1.7.2.min.js"></script>
     <script src="/Scripts/web.js"></script>
 </head>
 <body>
@@ -19,7 +19,7 @@
         <div class="top_one">
             <div class="top_tow">
                 <ul>
-                    <li style="font-family: '微软雅黑'">&nbsp;&nbsp;咨询电话：4000-858-602&nbsp;&nbsp;</li>
+                    <li style="font-family: '微软雅黑'">&nbsp;&nbsp;咨询电话：0371-63393801&nbsp;&nbsp;</li>
                     <li style="font-family: '微软雅黑'"><a href="/">网站首页</a>&nbsp;&nbsp;|</li>
                 </ul>
             </div>
@@ -73,7 +73,7 @@
                     <div class="public_img">
                         <img src="/images/hot.jpg" alt="报名电话" width="314px" height="82px" />
                     </div>
-                </div> 
+                </div>
                 <div class="new_there1">
                     <div class="new_there_top1">
                         <div class="new_there_top_title1">
@@ -83,8 +83,8 @@
                             <a href="/Home/TeacherList">more</a>
                         </div>
                     </div>
-                    <div class="taer1" id="teacher"> 
-                        
+                    <div class="taer1" id="teacher">
+
                     </div>
                 </div>
             </div>
@@ -102,8 +102,7 @@
                         }
                     </style>
                     <div class="biank">
-                        <ul id="studyul"> 
-                        </ul>
+                        <ul id="studyul"></ul>
                         <div style="clear: both"></div>
                     </div>
                     <div style="height:15px"></div>
@@ -133,13 +132,13 @@
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
 
         <div class="public_right">
             <div class="public_right_top">
-                &nbsp;&nbsp;&nbsp;&nbsp;您的位置：首页 >> $ColumnId$  >> $Title$
+                &nbsp;&nbsp;&nbsp;&nbsp;您的位置：<a href="http://www.zzdxemba.com/">首页</a>  >><a href="/Home/$ColumnName$">$ColumnId$</a> >> $Title$
             </div>
             <div class="public_right_content">
                 <h1 class="public_right_content_title">$Title$</h1>
@@ -169,6 +168,18 @@
             cursor: pointer;
             font-size: 14px;
         }
+
+        .friendlinks {
+            float: left;
+            width: 115px;
+            overflow: hidden;
+            height: 15px;
+            margin-top: 8px;
+        }
+
+            .friendlinks a {
+                color: #fff;
+            }
     </style>
     <div class="scroll" id="scroll" style="display:none;">
         <div style="width:30px;height:30px;margin:0 auto;margin-top:30px;">
@@ -196,20 +207,13 @@
         <div class="herder_one1"></div>
         <div class="herder_one">
             <div style="height: 10px;"></div>
-            <div style="height:30px;width: 1000px;margin: 0 auto;">
-                <div style="float: left;margin-top:8px;color: #fff;">友情链接：</div>
-                <div style="float: left;width:115px;overflow:hidden;height:15px;margin-top:8px;"><a href="#" style="color:#fff" target="_blank">郑大艺术品投资班</a></div>
-                <div style="float: left;width:115px;overflow:hidden;height:15px;margin-top:8px;"><a href="#" style="color:#fff" target="_blank">郑大电商班</a></div>
-                <div style="float: left;width:115px;overflow:hidden;height:15px;margin-top:8px;"><a href="#" style="color:#fff" target="_blank">郑大实战地产班</a></div>
-                <div style="float: left;width:115px;overflow:hidden;height:15px;margin-top:8px;"><a href="#" style="color:#fff" target="_blank">郑大国学商道班</a></div>
-                <div style="float: left;width:115px;overflow:hidden;height:15px;margin-top:8px;"><a href="#" style="color:#fff" target="_blank">郑大互联网金融班</a></div>
-                <div style="float: left;width:115px;overflow:hidden;height:15px;margin-top:8px;"><a href="#" style="color:#fff" target="_blank">郑大私募股权班</a></div>
-                <div style="float: left;width:115px;overflow:hidden;height:15px;margin-top:8px;"><a href="#" style="color:#fff" target="_blank">郑大经营方略班</a></div>
-                <div style="float: left;width:115px;overflow:hidden;height:15px;margin-top:8px;"><a href="#" style="color:#fff" target="_blank">郑大工商管理班</a></div>
+            <div style="height:30px;width: 1000px;margin: 0 auto;" id="friendlinks">
+
             </div>
             <div class="me">
                 <div class="onedm">
-                    <ul> 
+                    <ul>
+                        <li><a href="/Home/Summary">关于我们</a>&nbsp;&nbsp;|</li>
                         <li><a href="/Home/ContactUs">联系我们</a>&nbsp;&nbsp;|</li>
                         <li><a href="/Home/ProblemList">常见问题</a>&nbsp;&nbsp;|</li>
                         <li><a href="#">友情链接</a>&nbsp;&nbsp;|</li>
@@ -218,10 +222,13 @@
                 </div>
                 <div style="clear:both"></div>
                 <div class="herder_tow">
-                    <p>联系电话：4000-858-602</p>
+                    <p>联系电话：0371-63393801 0371-63393802</p>
                 </div>
                 <div class="herder_there">
-                    Copyright©2009-2013 pkueecs.com All RightReserved [京ICP备10037530号-1]
+                     郑州大学高级工商管理总裁研修版权所有  豫ICP备15033701号</br>
+                </div>
+                <div class="herder_there">
+                    地址：河南省郑州市大学路75号 </br>
                 </div>
             </div>
         </div>
@@ -231,6 +238,6 @@
 <script>
 
     $(function () {
-        getstudy(); getTeacher();
+        getstudy(); getTeacher(); getFriendLink();
     })
 </script>

@@ -20,7 +20,7 @@ namespace CompanyModelProject.Controllers
         public ActionResult NewsAdd()
         {
             ViewBag.RightsId = RightsId;
-            ViewBag.liId = "columnli3"; 
+            ViewBag.liId = "columnli3";
             ViewBag.admin = LoginName;
             ViewBag.title = Title;
             return View();
@@ -38,7 +38,7 @@ namespace CompanyModelProject.Controllers
                 ColumnModel cm = service.GetModel(model.ColumnId);
                 if (cm != null)
                 {
-                    if (model.Main != "")
+                    if (!string.IsNullOrEmpty(model.Main))
                     {
                         htmlurl = FileToHtml.WriteFile(model.Title, model.Main, DateTime.Now.ToString(), cm.ColumnName, model.BriefMain, model.picUrl);//生成静态文件
                     }
@@ -386,7 +386,7 @@ namespace CompanyModelProject.Controllers
                         sb1.Append(" <li class='id1'>");
                         sb1.AppendFormat("<img class='lazy' src='..{0}' alt='{1}'/>", list1[i].picUrl, list1[i].Title);
                         sb1.Append("<div class='new_wodrs_list'><div class='new_wodrs_list_title'>");
-                        sb1.AppendFormat("<b>{0}</b>", list1[i].Title.Length > 35?list1[i].Title.Substring(0,35):list1[i].Title);
+                        sb1.AppendFormat("<b>{0}</b>", list1[i].Title.Length > 35 ? list1[i].Title.Substring(0, 35) : list1[i].Title);
                         sb1.Append(" </div> <div class='new_num'>");
                         sb1.AppendFormat("&nbsp;&nbsp; &nbsp;&nbsp;{0}", list1[i].BriefMain.Length > 60 ? list1[i].BriefMain.Substring(0, 60) + "…" : list1[i].BriefMain);
                         sb1.Append("</div> <div class='flass'>");
@@ -411,11 +411,11 @@ namespace CompanyModelProject.Controllers
                 for (int i = 0; i < list2.Count; i++)
                 {
                     string title = list2[i].Title;
-                    if (list2[i].Title.Length > 26)
+                    if (list2[i].Title.Length > 24)
                     {
-                        title = title.Substring(0, 26);
+                        title = title.Substring(0, 24);
                     }
-                    sb2.AppendFormat("<div class='fll2' style='height:28px;line-height:25px;'><a href='{1}' alt='{0}' target='_blank'> {0})</a></div>", title, list2[i].HtmlUrl);
+                    sb2.AppendFormat("<div class='fll2' style='height:28px;line-height:25px;'><a href='{1}' alt='{0}' target='_blank'><span class='tear_t_dot' style='margin-right:2px;'></span> {0})</a></div>", title, list2[i].HtmlUrl);
                 }
             }
             //简介 一条
@@ -438,8 +438,8 @@ namespace CompanyModelProject.Controllers
                 for (int i = 0; i < list4.Count; i++)
                 {
                     sb4.Append(" <div class='student_list3' style='height:20px'>");
-                    sb4.AppendFormat("<a href='{0}' target='_blank'>{1}</a> </div>", list4[i].HtmlUrl, list4[i].Title.Length > 20 ? list4[i].Title.Substring(0, 20)  : list4[i].Title);
-            
+                    sb4.AppendFormat("<a href='{0}' target='_blank'>{1}</a> </div>", list4[i].HtmlUrl, list4[i].Title.Length > 20 ? list4[i].Title.Substring(0, 20) : list4[i].Title);
+
                 }
             }
             //学员企业
@@ -450,7 +450,7 @@ namespace CompanyModelProject.Controllers
                 for (int i = 0; i < list5.Count; i++)
                 {
                     sb5.Append(" <div class='student_list_xue' style='height:20px'>");
-                    sb5.AppendFormat("<a href='{0}' target='_blank'>{1}</a> </div>", list5[i].HtmlUrl, list5[i].Title.Length > 20 ? list5[i].Title.Substring(0, 20)  : list5[i].Title);
+                    sb5.AppendFormat("<a href='{0}' target='_blank'>{1}</a> </div>", list5[i].HtmlUrl, list5[i].Title.Length > 20 ? list5[i].Title.Substring(0, 20) : list5[i].Title);
                 }
             }
             //管理资讯
@@ -460,7 +460,7 @@ namespace CompanyModelProject.Controllers
             {
                 for (int i = 0; i < list6.Count; i++)
                 {
-                    sb6.AppendFormat(" <div class='student_list3' style='height:20px;width:320px;'><div style='width:210px'><a href='{0}' target='_blank'>{1}</a></div><div class='stu_one'>{2}</div></div>", list6[i].HtmlUrl, list6[i].Title.Length > 16 ? list6[i].Title.Substring(0, 16)  : list6[i].Title, list6[i].CreateTime.ToString("MM-dd"));
+                    sb6.AppendFormat(" <div class='student_list3' style='height:20px;width:320px;'><div style='width:210px'><a href='{0}' target='_blank'>{1}</a></div><div class='stu_one'>{2}</div></div>", list6[i].HtmlUrl, list6[i].Title.Length > 16 ? list6[i].Title.Substring(0, 16) : list6[i].Title, list6[i].CreateTime.ToString("MM-dd"));
                 }
             }
             //名师介绍(图片)
@@ -472,7 +472,7 @@ namespace CompanyModelProject.Controllers
                 {
                     sb7.Append(" <div class='taer_img1'>");
                     sb7.AppendFormat(" <a href='{0}' target='_blank'><img class='lazy' src='..{1}' alt='{2}' width='82px' height='109px' /></a>", list7[i].HtmlUrl, list7[i].picUrl, list7[i].Title);
-                    sb7.AppendFormat(" <div>{0}</div></div>",list7[i].Title);
+                    sb7.AppendFormat(" <div>{0}</div></div>", list7[i].Title);
                 }
 
             }
@@ -483,7 +483,7 @@ namespace CompanyModelProject.Controllers
             {
                 for (int i = 0; i < list8.Count; i++)
                 {
-                    sb8.AppendFormat(" <li><img class='lazy' src='../{0}' width='280' height='160'></li>", list8[i].picUrl);
+                    sb8.AppendFormat("<li><a href='{1}' target='_blank'> <img class='lazy' src='../{0}' width='280' height='160'></a></li>", list8[i].picUrl, list8[i].fromUrl);
                 }
             }
             bool issucess = indextofile(sb1.ToString(), sb2.ToString(), sb3.ToString(), sb4.ToString(), sb5.ToString(), sb6.ToString(), sb7.ToString(), sb8.ToString());
@@ -522,7 +522,7 @@ namespace CompanyModelProject.Controllers
                 Response.End();
                 sr.Close();
             }
-            string htmlfilename =Server.MapPath("/Index.html");
+            string htmlfilename = Server.MapPath("/Index.html");
             str = str.Replace("$keys$", KeyWords);
             str = str.Replace("$dec$", Description);
 
@@ -534,7 +534,7 @@ namespace CompanyModelProject.Controllers
             str = str.Replace("$newslist6$", sb6);
             str = str.Replace("$newslist7$", sb7);
             str = str.Replace("$newslist8$", sb8);
-            
+
             try
             {
                 sw = new StreamWriter(htmlfilename, false, code);
@@ -551,6 +551,49 @@ namespace CompanyModelProject.Controllers
                 sw.Close();
             }
             return true;
+        }
+
+        public ActionResult NewslistToHtmlHandler()
+        {
+            string tID = RequestQueryString.GetQueryString("v");
+            if (!string.IsNullOrEmpty(tID))
+            {
+                tID = tID.Substring(0, tID.Length - 1);
+                string[] newids = tID.Split(',');
+                string htmlurl = "";
+                int result = 0;
+                if (newids.Length > 0)
+                {
+                    foreach (var item in newids)
+                    {
+                        NewsModel model = newsService.GetModel(int.Parse(item));
+                        ColumnModel cm = service.GetModel(model.ColumnId);
+                        if (cm!=null)
+                        {
+                            if (!string.IsNullOrEmpty(model.Main))
+                            {
+                                htmlurl = FileToHtml.WriteFile(model.Title, model.Main, DateTime.Now.ToString(), cm.ColumnName, model.BriefMain, model.picUrl);//生成静态文件
+                                model.HtmlUrl = htmlurl;
+                                int r = newsService.update(model);
+                                if (r!=0)
+                                {
+                                    result += 1;
+                                } 
+                            } 
+                        }
+                    }
+                    return Json(new { code = 0, message = "一共生成"+result+"条数据！" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { code = 1, message = "操作失败，数据异常！" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                return Json(new { code = 1, message = "操作失败，数据异常！！" }, JsonRequestBehavior.AllowGet);
+            } 
+            
         }
     }
 }

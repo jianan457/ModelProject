@@ -273,3 +273,29 @@ function delMessage(v) {
         });
     }
 }
+
+function ToHtml()
+{
+    var checkID = new Array();
+    $('input[name="chk_list"]:checked').each(function (i) {
+        checkID[i] = $(this).val();
+    });
+    if (checkID == null || checkID == '') {
+        alert("您有选择任何选项"); 
+    }
+    else {
+        var v = '';
+        for (var i = 0; i < checkID.length; i++) {
+            if (checkID[i] != '') {
+                v += checkID[i] + ',';
+            }
+        }
+        $.get('/News/NewslistToHtmlHandler?date=' + new Date(), { v: v }, function (data) {
+            if (data.code == 0) {
+                alert(data.message);
+                window.location = "/News/NewsList";
+            }
+            else { alert(data.message); }
+        });
+    }
+}

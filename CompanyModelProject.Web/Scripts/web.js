@@ -53,14 +53,28 @@ function getstudy() {
         if (data.code == 0) {
             var obj = eval(data.data);
             for (var i = 0; i < obj.length; i++) {
-                if (obj[i].Name.length>25) {
-                    obj[i].Name = obj[i].Name.toString().substring(0, 25);
+                if (obj[i].Name.length>23) {
+                    obj[i].Name = obj[i].Name.toString().substring(0, 23);
                 }
-             html += '<li><span class="fll1"> <a href="' + obj[i].HtmlUrl + '"> • ' + obj[i].Name +'</a></span></li>';
+                html += '<li><span class="fll1"> <a href="' + obj[i].HtmlUrl + '"> <span class="tear_t_dot" style="margin-right:2px;"></span> ' + obj[i].Name + '</a></span></li>';
             }
             $("#studyul").html(html);
             }
         else { alert(data.message); } 
         } 
+    );
+}
+
+function getFriendLink() { 
+    $.get('/Home/getFriendLinkHandler?date=' + new Date(), {}, function (data) {
+        if (data.code == 0) {
+            var html = ' <div style="float: left;margin-top:8px;color: #fff;">友情链接：</div>';
+            var obj = eval(data.data);
+            for (var i = 0; i < obj.length; i++) {
+                html += ' <div class="friendlinks"><a href="' + obj[i].fromUrl + '" target="_blank"> ' + obj[i].Name + '</a></div>'; 
+            }
+            $("#friendlinks").html(html);
+        } 
+    }
     );
 } 

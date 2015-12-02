@@ -52,6 +52,7 @@ namespace CompanyModelProject.Common
             str = str.Replace("$Main$", strContent);
             str = str.Replace("$AddTime$", datetime);
             str = str.Replace("$ColumnId$", Column);
+            str = str.Replace("$ColumnName$", NumToChinese.getColumn(Column));
             if (Column == "名师介绍")
             {
                 str = str.Replace("$MainBrief$", brief);

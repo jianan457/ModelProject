@@ -45,7 +45,9 @@
 /*鍙宠竟*/
 .public_right_top{width: 675px;height:41px;background: #8F0002;line-height:41px;color:#fff;font-family: 瀹嬩綋;}
 .public_right_content{width: 675px;margin-top:5px;border: 0px solid red;}
-
+.public_right_top a {
+color:#fff;
+}
 
 /*甯堣祫鍒楄〃鏍峰紡寮€濮�*/
 .taer_list{width: 308px;height: 198px;border: 0px solid red;float: left;margin-left:20px;margin-top:20px}
@@ -103,3 +105,10 @@ font-weight: bold;margin-top:20px;}
 .clearfloat{clear: both;}
 
 .article_content{line-height:20px}
+    .tear_t_dot {
+        display: inline-block;
+        width: 6px;
+        height: 15px;
+        background: url(/images/jwggbg.jpg) no-repeat;
+        padding-top: 2px; 
+    }

@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.secTitle = "首页";
     Layout = "~/Views/Shared/_layout.cshtml";
-}
+} 
 <div style="height:20px;"></div>
 <div id="content">
     <div class="content_one">
@@ -69,7 +69,7 @@
                 {
                     foreach (var item in ViewBag.study)
                     {
-                        <div class="fll2" style="height:28px;line-height:25px;"><a href="@item.HtmlUrl" alt="@item.Title" target="_blank"> •  @(item.Title.Length > 26 ? item.Title.Substring(0, 26)  : item.Title)</a></div>
+                        <div class="fll2" style="height:28px;line-height:25px;"><a href="@item.HtmlUrl" alt="@item.Title" target="_blank"><span class="tear_t_dot"></span> @(item.Title.Length > 23 ? item.Title.Substring(0, 23) : item.Title)</a></div>
                     }
                 }
             </div>
@@ -215,6 +215,7 @@
     .stu_one {
         margin-left: 60px;
     }
+
 </style>
 <!--学员风采结束-->
 <div style="clear: both;height:20px"></div>
@@ -277,7 +278,7 @@
                 {
                     foreach (var item in ViewBag.newPic)
                     {
-                        <li><img class="lazy" data-original="@item.picUrl" width="280" height="160"></li>
+                        <li><a href="@item.fromUrl" target="_blank"><img class="lazy" data-original="@item.picUrl" width="280" height="160"></a></li>
                     }
                 } 
             </ul>
@@ -302,7 +303,7 @@
                 }
     </style>
     <script>
-        (function () {
+        (function () { 
             $("#marquee1").kxbdMarquee({ direction: "left", isEqual: true });
         })();
     </script>

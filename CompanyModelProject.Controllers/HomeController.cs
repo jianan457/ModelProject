@@ -230,7 +230,7 @@ namespace CompanyModelProject.Controllers
             ViewBag.dec = Description;
             ViewBag.title = Title;
             int page = RequestQueryString.GetQueryInt("page", 1);
-            int size = 20;
+            int size = 10;
             int total = 0;
             int count = 0;
             string strwhere = null;
@@ -574,5 +574,29 @@ namespace CompanyModelProject.Controllers
             }
 
         }
+
+        public ActionResult getFriendLinkHandler()
+        {
+            List<NewsModel> list = news.getmodelbywhere(" and ColumnId=43");
+            StringBuilder sb = new StringBuilder();
+            if (list != null && list.Count > 0)
+            {
+                sb.Append("[");
+                foreach (var item in list)
+                {
+                    sb.Append("{");
+                    sb.Append("'Id':'" + item.ID + "','Name':'" + item.Title + "','fromUrl':'" + item.fromUrl + "'");
+                    sb.Append("},");
+                }
+                sb.Append("]");
+                return Json(new { code = 0, data = sb.ToString() }, JsonRequestBehavior.AllowGet);
+            }
+
+            else
+            {
+                return Json(new { code = 1 }, JsonRequestBehavior.AllowGet);
+            }
+        } 
+     
     }
 }

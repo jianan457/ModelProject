@@ -73,7 +73,7 @@ namespace CompanyModelProject.Controllers
 
         public ActionResult loginoff()
         {
-            string domain = "www.model.com";
+            string domain = "www.zzdxemba.com";
             Common.CookieManager cm = new Common.CookieManager();
             cm.deleteCookie("userinfo", domain);
             return RedirectToAction("Login", "Account");
