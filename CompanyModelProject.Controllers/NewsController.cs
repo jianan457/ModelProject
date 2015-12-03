@@ -411,9 +411,9 @@ namespace CompanyModelProject.Controllers
                 for (int i = 0; i < list2.Count; i++)
                 {
                     string title = list2[i].Title;
-                    if (list2[i].Title.Length > 24)
+                    if (list2[i].Title.Length > 23)
                     {
-                        title = title.Substring(0, 24);
+                        title = title.Substring(0, 23);
                     }
                     sb2.AppendFormat("<div class='fll2' style='height:28px;line-height:25px;'><a href='{1}' alt='{0}' target='_blank'><span class='tear_t_dot' style='margin-right:2px;'></span> {0})</a></div>", title, list2[i].HtmlUrl);
                 }
