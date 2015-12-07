@@ -40,7 +40,7 @@ namespace CompanyModelProject.Controllers
                 {
                     if (!string.IsNullOrEmpty(model.Main))
                     {
-                        htmlurl = FileToHtml.WriteFile(model.Title, model.Main, DateTime.Now.ToString(), cm.ColumnName, model.BriefMain, model.picUrl);//生成静态文件
+                        htmlurl = FileToHtml.WriteFile(model.Title, model.Main, DateTime.Now, cm.ColumnName, model.BriefMain, model.picUrl);//生成静态文件
                     }
                     //if (htmlurl != null)
                     // {
@@ -295,7 +295,7 @@ namespace CompanyModelProject.Controllers
                 string htmlurl = "";
                 if (model.Main != "")
                 {
-                    htmlurl = FileToHtml.WriteFile(model.Title, model.Main, DateTime.Now.ToString(), cm.ColumnName, model.BriefMain, model.picUrl);//生成静态文件
+                    htmlurl = FileToHtml.WriteFile(model.Title, model.Main, model.CreateTime, cm.ColumnName, model.BriefMain, model.picUrl);//生成静态文件
 
                 }
                 //if (htmlurl != null)
@@ -572,7 +572,7 @@ namespace CompanyModelProject.Controllers
                         {
                             if (!string.IsNullOrEmpty(model.Main))
                             {
-                                htmlurl = FileToHtml.WriteFile(model.Title, model.Main, DateTime.Now.ToString(), cm.ColumnName, model.BriefMain, model.picUrl);//生成静态文件
+                                htmlurl = FileToHtml.WriteFile(model.Title, model.Main, model.CreateTime, cm.ColumnName, model.BriefMain, model.picUrl);//生成静态文件
                                 model.HtmlUrl = htmlurl;
                                 int r = newsService.update(model);
                                 if (r!=0)

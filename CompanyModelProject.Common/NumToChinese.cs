@@ -47,6 +47,12 @@ namespace CompanyModelProject.Common
                    break;
                case "企业内训": Columnname = "Training";
                    break;
+               case "学员企业": Columnname = "Stuenterprise";
+                   break;
+               case "学员风采": Columnname = "StustyleList";
+                   break;
+               case "管理资讯": Columnname = "ManagementInfo";
+                   break;
                default:
                    break;
            }

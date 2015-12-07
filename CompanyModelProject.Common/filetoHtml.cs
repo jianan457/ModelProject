@@ -9,7 +9,7 @@ namespace CompanyModelProject.Common
 {
     public class FileToHtml
     {
-        public static string WriteFile(string strTitle, string strContent, string datetime,string Column,string brief,string pic)//文章详情
+        public static string WriteFile(string strTitle, string strContent, DateTime datetime,string Column,string brief,string pic)//文章详情
         { 
             string path = HttpContext.Current.Server.MapPath("/WebHtml/" + DateTime.Now.ToString("yyyyMMdd")+"/");
             string filepath = string.Empty;
@@ -44,13 +44,13 @@ namespace CompanyModelProject.Common
                 HttpContext.Current.Response.End();
                 sr.Close();
             }
-            string htmlfilename = DateTime.Now.ToString("yyyyMMddHHmmss") + ".html";
+            string htmlfilename =datetime.ToString("yyyyMMddHHmmss") + ".html";
             // 替换内容
             // 这时,模板文件已经读入到名称为str的变量中了
             //str = str.Replace("Title", strTitle); //模板页中的ShowArticle
             str = str.Replace("$Title$", strTitle);
             str = str.Replace("$Main$", strContent);
-            str = str.Replace("$AddTime$", datetime);
+            str = str.Replace("$AddTime$", datetime.ToString());
             str = str.Replace("$ColumnId$", Column);
             str = str.Replace("$ColumnName$", NumToChinese.getColumn(Column));
             if (Column == "名师介绍")

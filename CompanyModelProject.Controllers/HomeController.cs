@@ -342,7 +342,7 @@ namespace CompanyModelProject.Controllers
             int count = 0;
             string strwhere = null;
             List<string> urllist = new List<string>();
-            string url = "/Home/Enrollment?page={0}";
+            string url = "/Home/ProblemList?page={0}";
             strwhere = " and ColumnId=39";
             List<NewsWebModel> List = news.GetwebPageList(page, size, ref total, ref count, strwhere);
             for (int i = 0; i < count; i++)
@@ -365,7 +365,173 @@ namespace CompanyModelProject.Controllers
             return View();
 
         }
-      
+        /// <summary>
+        /// 学院风采
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult StustyleList()
+        {
+            if (getTeacher() != null && getTeacher().Count > 0)
+            {
+                ViewBag.teacher = getTeacher();
+            }
+            else
+            {
+                ViewBag.teachermsg = "暂无数据";
+            }
+            //教务公告
+            if (getStudy() != null && getStudy().Count > 0)
+            {
+                ViewBag.study = getStudy();
+            }
+            else
+            {
+                ViewBag.studymsg = "暂无数据";
+            }
+            ViewBag.keys = KeyWords;
+            ViewBag.dec = Description;
+            ViewBag.title = Title;
+            int page = RequestQueryString.GetQueryInt("page", 1);
+            int size = 20;
+            int total = 0;
+            int count = 0;
+            string strwhere = null;
+            List<string> urllist = new List<string>();
+            string url = "/Home/StustyleList?page={0}";
+            strwhere = " and ColumnId=36";
+            List<NewsWebModel> List = news.GetwebPageList(page, size, ref total, ref count, strwhere);
+            for (int i = 0; i < count; i++)
+            {
+                urllist.Add(string.Format(url, (i + 1)));
+            }
+            ViewBag.Url = urllist;
+            ViewBag.PageIndex = page;
+            ViewBag.webdata = List;
+            ViewBag.count = total;
+            if (List != null)
+            {
+                ViewBag.data = List;
+            }
+            else
+            {
+                ViewBag.data = null;
+                ViewBag.meg = "暂无数据";
+            }
+            return View();
+
+        }
+
+        /// <summary>
+        /// 学院企业
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Stuenterprise()
+        {
+            if (getTeacher() != null && getTeacher().Count > 0)
+            {
+                ViewBag.teacher = getTeacher();
+            }
+            else
+            {
+                ViewBag.teachermsg = "暂无数据";
+            }
+            //教务公告
+            if (getStudy() != null && getStudy().Count > 0)
+            {
+                ViewBag.study = getStudy();
+            }
+            else
+            {
+                ViewBag.studymsg = "暂无数据";
+            }
+            ViewBag.keys = KeyWords;
+            ViewBag.dec = Description;
+            ViewBag.title = Title;
+            int page = RequestQueryString.GetQueryInt("page", 1);
+            int size = 20;
+            int total = 0;
+            int count = 0;
+            string strwhere = null;
+            List<string> urllist = new List<string>();
+            string url = "/Home/Stuenterprise?page={0}";
+            strwhere = " and ColumnId=37";
+            List<NewsWebModel> List = news.GetwebPageList(page, size, ref total, ref count, strwhere);
+            for (int i = 0; i < count; i++)
+            {
+                urllist.Add(string.Format(url, (i + 1)));
+            }
+            ViewBag.Url = urllist;
+            ViewBag.PageIndex = page;
+            ViewBag.webdata = List;
+            ViewBag.count = total;
+            if (List != null)
+            {
+                ViewBag.data = List;
+            }
+            else
+            {
+                ViewBag.data = null;
+                ViewBag.meg = "暂无数据";
+            }
+            return View();
+
+        }
+
+        /// <summary>
+        /// 管理资讯
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ManagementInfo()
+        {
+            if (getTeacher() != null && getTeacher().Count > 0)
+            {
+                ViewBag.teacher = getTeacher();
+            }
+            else
+            {
+                ViewBag.teachermsg = "暂无数据";
+            }
+            //教务公告
+            if (getStudy() != null && getStudy().Count > 0)
+            {
+                ViewBag.study = getStudy();
+            }
+            else
+            {
+                ViewBag.studymsg = "暂无数据";
+            }
+            ViewBag.keys = KeyWords;
+            ViewBag.dec = Description;
+            ViewBag.title = Title;
+            int page = RequestQueryString.GetQueryInt("page", 1);
+            int size = 20;
+            int total = 0;
+            int count = 0;
+            string strwhere = null;
+            List<string> urllist = new List<string>();
+            string url = "/Home/ManagementInfo?page={0}";
+            strwhere = " and ColumnId=38";
+            List<NewsWebModel> List = news.GetwebPageList(page, size, ref total, ref count, strwhere);
+            for (int i = 0; i < count; i++)
+            {
+                urllist.Add(string.Format(url, (i + 1)));
+            }
+            ViewBag.Url = urllist;
+            ViewBag.PageIndex = page;
+            ViewBag.webdata = List;
+            ViewBag.count = total;
+            if (List != null)
+            {
+                ViewBag.data = List;
+            }
+            else
+            {
+                ViewBag.data = null;
+                ViewBag.meg = "暂无数据";
+            }
+            return View();
+
+        }
         public ActionResult ContactUs()//联系我们
         {
             ViewBag.keys = KeyWords;
