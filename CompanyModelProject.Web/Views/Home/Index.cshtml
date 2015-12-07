@@ -69,7 +69,7 @@
                 {
                     foreach (var item in ViewBag.study)
                     {
-                        <div class="fll2" style="height:28px;line-height:25px;"><a href="@item.HtmlUrl" alt="@item.Title" target="_blank"><span class="tear_t_dot"></span> @(item.Title.Length > 23 ? item.Title.Substring(0, 23) : item.Title)</a></div>
+                        <div class="fll2" style="height:28px;line-height:25px;"><a href="@item.HtmlUrl" alt="@item.Title" target="_blank"><span class="tear_t_dot"></span> @(item.Title.Length > 22 ? item.Title.Substring(0, 22) : item.Title)</a></div>
                     }
                 }
             </div>

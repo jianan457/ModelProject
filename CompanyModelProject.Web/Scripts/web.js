@@ -53,8 +53,8 @@ function getstudy() {
         if (data.code == 0) {
             var obj = eval(data.data);
             for (var i = 0; i < obj.length; i++) {
-                if (obj[i].Name.length>23) {
-                    obj[i].Name = obj[i].Name.toString().substring(0, 23);
+                if (obj[i].Name.length>21) {
+                    obj[i].Name = obj[i].Name.toString().substring(0, 21);
                 }
                 html += '<li><span class="fll1"> <a href="' + obj[i].HtmlUrl + '"> <span class="tear_t_dot" style="margin-right:2px;"></span> ' + obj[i].Name + '</a></span></li>';
             }
