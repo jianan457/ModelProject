@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.secTitle = "常见问题";
+    ViewBag.secTitle = "学员风采";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -101,7 +101,7 @@
     </div>
     <div class="public_right">
         <div class="public_right_top">
-            &nbsp;&nbsp;&nbsp;&nbsp;您的位置：<a href="http://www.zzdxemba.com/">首页</a> >> 常见问题
+            &nbsp;&nbsp;&nbsp;&nbsp;您的位置：<a href="http://www.zzdxemba.com/">首页</a> >> 学员风采
         </div>
         <div class="public_right_content">
             <ul class="new_list">
@@ -114,7 +114,7 @@
                             <div class="new_title">
                                 <a href="@item.HtmlUrl"><span style="width:570px">&nbsp;&nbsp;&nbsp;·@(item.Title.Length > 36 ? item.Title.Substring(0, 36) : item.Title)</span><span>@item.CreateTime.ToString("yyyy-MM-dd")</span></a>
                             </div>
-                        </li> 
+                        </li>
                     }
                 }
                 else
@@ -185,7 +185,7 @@
                     }
 
 
-                </span> 
+                </span>
             </div>
         }
     </div>

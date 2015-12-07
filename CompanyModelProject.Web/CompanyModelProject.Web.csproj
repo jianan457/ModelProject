@@ -423,6 +423,9 @@
     <Content Include="Views\Home\ProblemList.cshtml" />
     <Content Include="Views\Home\NewsList.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
+    <Content Include="Views\Home\StustyleList.cshtml" />
+    <Content Include="Views\Home\Stuenterprise.cshtml" />
+    <Content Include="Views\Home\ManagementInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

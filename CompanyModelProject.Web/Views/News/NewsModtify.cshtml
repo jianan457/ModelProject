@@ -79,10 +79,11 @@
                     </li>
                     <li>
                         <label>浏览次数</label>@Html.TextBoxFor(Model => Model.Clicks, new { @readonly=true })
-                     
+                        @Html.HiddenFor(Model => Model.CreateTime)
                     </li>
                     <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="提交保存" /></li>
                 </ul>
+               
             }
         </div>
 

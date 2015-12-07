@@ -290,6 +290,7 @@ function ToHtml()
                 v += checkID[i] + ',';
             }
         }
+       
         $.get('/News/NewslistToHtmlHandler?date=' + new Date(), { v: v }, function (data) {
             if (data.code == 0) {
                 alert(data.message);
